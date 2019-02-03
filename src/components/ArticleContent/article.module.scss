@@ -1,0 +1,58 @@
+@import '../colors.scss';
+@import '../mixins.scss';
+
+.article {
+	max-width: 64rem;
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 0 1.45rem;
+
+	h1, h2 {
+			display: block;
+		position: relative;
+		clear: both;
+
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 2px;
+			left: -2rem;
+			background-color: $color-black;
+			box-sizing: border-box;
+		}
+	}
+	h1::before {
+		top: 12px;
+		bottom: 15px;
+	}
+	h2::before {
+		top: 8px;
+		bottom: 13px;
+	}
+
+	li {
+		position: relative;
+		counter-increment: li;
+		margin-left: 1.45rem;
+		margin-bottom: 1.45rem;
+
+		&::before {
+			content: "■";
+			position: absolute;
+			transform: translateX(-1.45rem);
+			top: 0;
+			color: $color-blue;
+		}
+	}
+
+	code {
+		display: inline-block;
+		color:$color-pink;
+		font-weight: bold;
+	}
+
+	strong {
+		font-weight: 700;
+	}
+}
