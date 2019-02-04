@@ -1,7 +1,6 @@
 {
   "name": "nec.is",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "start": "npm run dev",
     "dev": "npx gatsby develop",
@@ -10,7 +9,7 @@
     "develop": "gatsby develop",
     "format": "npx prettier --write \"src/**/*.js\""
   },
-  "dependencies": {
+  "devDependencies": {
     "@mdx-js/mdx": "^0.15.7",
     "@mdx-js/tag": "^0.15.6",
     "gatsby": "^2.0.40",
@@ -35,7 +34,9 @@
     "prettier": "^1.14.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "gatsby-remark-copy-linked-files": "^2.0.9",
+    "gatsby-remark-smartypants": "^2.0.8"
   },
   "browserslist": [
     "> 1%",
@@ -43,9 +44,5 @@
   ],
   "watch": {
     "build": "src/**/*.*"
-  },
-  "devDependencies": {
-    "gatsby-remark-copy-linked-files": "^2.0.9",
-    "gatsby-remark-smartypants": "^2.0.8"
   }
 }

@@ -13,10 +13,10 @@ const components = {
 
 function PostPageTemplate({ data: { mdx } }) {
   const { relativePath } = mdx.parent
-  const { date, tags, dateTime } = mdx.frontmatter
+  const { title, date, tags, dateTime } = mdx.frontmatter
 
   return (
-    <Layout>
+    <Layout title={title}>
       <ArticleContent>
         <MDXRenderer components={components}>{mdx.code.body}</MDXRenderer>
       </ArticleContent>
@@ -41,6 +41,7 @@ export const pageQuery = graphql`
         }
       }
       frontmatter {
+        title
         date(formatString: "MMMM Do, YYYY")
         dateTime: date
         tags

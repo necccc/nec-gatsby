@@ -11,19 +11,21 @@ tags:
 - try-catch
 ---
 
+import Intro from "../../../src/components/Intro";
 import Blockquote from "../../../src/components/Blockquote";
-import Pic from "../../../src/components/Pic";
+
+<Intro>
 
 Many developers getting familiar with async/await these days, as this feature is getting even more stable and performant in Node.js, and it's recommended to use them instead of Promises, or callbacks.
 
 But I've seen the question appear from several sources: "Okay okay, we got async/await, but how we handle errors?" This post aims to be an ultimate guide for those, who seek the answer for this. Don't worry, it won't be long, or complex!
 
-<a name="arguments" class="anchor post-intro"></a>
+</Intro>
 
 
 ## Let it throw
 
-![left](./let-it-throw.gif "Elza handling async errors propery")
+![left](./let-it-throw.gif "Elza handling async errors properly")
 
 Yup, that's it!
 
@@ -45,6 +47,10 @@ In JavaScript a really clean way to code is to stick to this simple rule: Operat
 Think about it: if a function returns an error, what would that mean? The result of a process is an error? Can we store it to a database, pass it along to the user? Sure, we can type check for errors all the time, but that sounds tedious, and thankfully the somewhat-similar error-first approach is slowly behind us.
 
 ![right](./let-it-throw.gif "Elza handling async errors propery")
+
+
+
+### Clean & Simple
 
 Your code should be clean and never hide its intent. Looking at it should be as simple to comprehend as possible so the next developer after you, or yourself after a year (or week, or only days) can read, understand, debug or improve, or just add new functionality as easy as possible.
 
@@ -72,6 +78,7 @@ V8's old interpreter and compiler called _Crankshaft_ was performing really poor
 </Blockquote>
 
 
+
 ## Example time!
 
 I've prepared [two small examples](https://github.com/necccc/async-await-errors) using popular web frameworks: Express and Hapi.
@@ -82,10 +89,10 @@ I've prepared [two small examples](https://github.com/necccc/async-await-errors)
 
 Unfortunately, Express does not handle errors thrown in async route handlers, you need to use their `next()` function argument in your route handler. To keep code clean, you can implement a small wrapper around your route handlers, that will catch the errors, and pass them to the `next` callback - like in [this great example by Gergely Nemeth](https://nemethgergely.com/error-handling-express-async-await/).
 
-
 ### Hapi
 
 [Hapi 17](https://hapijs.com/) was rewritten to utilize async/await everywhere, so you can throw your exceptions, or even better your [Boom errors](https://github.com/hapijs/boom) at Hapi, and it will handle them nicely, and resolve the requests accordingly, no need for special middlewares, unless you have some use case for that.
+
 
 
 ## Conclusion
