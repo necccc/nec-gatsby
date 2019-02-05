@@ -5,7 +5,7 @@
 	position: relative;
 	z-index: 2;
 	display: block;
-	padding-top: 2rem;
+	padding-top: calc(var(--headerHeight) + 2rem);
 	margin-bottom: 4rem;
 
 	&::after {

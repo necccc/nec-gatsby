@@ -11,7 +11,7 @@ export default props => (
     <ul>
       {props.data.allMdx.edges.map(({ node }) => (
         <li key={node.id}>
-          <Link to={`/${node.parent.sourceInstanceName}/${node.parent.name}`}>
+          <Link to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}>
             {node.frontmatter.title}
           </Link>
         </li>
@@ -31,6 +31,9 @@ export const query = graphql`
               name
               sourceInstanceName
             }
+          }
+          fields {
+            slug
           }
           timeToRead
           frontmatter {
