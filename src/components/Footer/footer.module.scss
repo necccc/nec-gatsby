@@ -20,8 +20,9 @@
         background-color: inherit;
         z-index: 1;
         bottom: 0;
-        top: -8rem;
-        transform: skewY(var(--footerSkew));
+        top: -7rem;
+        transform: skewY(4deg);
+		transform-origin: bottom left;
         transition: transform ease-out .1s;
     }
 

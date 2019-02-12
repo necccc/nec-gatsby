@@ -7,7 +7,7 @@
     padding: 4rem 0 2rem;
     margin: -4rem 0 0;
     transform: translateY(6rem);
-    background-color: $color-light-1;
+
     color: lighten($color-black, 50%);
 
     font-family: 'Libre Franklin', sans-serif;
@@ -15,16 +15,17 @@
     font-size: .8em;
 
     &::after {
-        z-index: 1;
         content: '';
+        background-color: $color-light-1;
+        z-index: 1;
         display: block;
         position: absolute;
-        top: 0;
+        top: 1rem;
         width: 100%;
-        height: 100%;
-        transform: skewY(calc(var(--footerSkew) * -0.6));
+        height: 120%;
+        transform: skewY(-3deg);
         transform-origin: left top;
-        background-color: inherit;
+
     }
 
     &_inner {
