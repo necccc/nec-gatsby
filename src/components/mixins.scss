@@ -38,3 +38,8 @@
         text-shadow: none;
     }
 }
+
+@mixin noUnderline(){
+    text-shadow: none;
+    background: none;
+}

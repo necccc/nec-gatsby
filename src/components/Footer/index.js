@@ -67,11 +67,19 @@ const Footer = ({ title = '' }) => (
           </p>
           <p>
             Built using{' '}
-            <a href="https://www.gatsbyjs.org/" target="_blank">
+            <a
+              href="https://www.gatsbyjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               GatsbyJS
             </a>
             , deployed on{' '}
-            <a href="https://netlify.com/" target="_blank">
+            <a
+              href="https://netlify.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Netlify
             </a>
             .<br />

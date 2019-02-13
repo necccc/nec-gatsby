@@ -1,4 +1,6 @@
 @import '../colors.scss';
+@import '../mixins.scss';
+@import '../font-face.scss';
 
 .header {
 
@@ -10,7 +12,7 @@
 	z-index: 10;
 	overflow: hidden;
 
-	font-family: 'Libre Baskerville', sans-serif;
+	font-family: $heading-font;
 
 	&::after {
 		content: '';
@@ -34,7 +36,7 @@
 	&_top {
 		position: relative;
 		display: block;
-		z-index: 3;
+		z-index: 10;
 		height: 5rem;
 		max-width: 60rem;
 		margin: 0 auto;
@@ -51,6 +53,7 @@
 		z-index: 2;
 		margin: 0;
 		top: 1rem;
+		left: -1rem;
 	}
 
 	&_home_text {
@@ -63,19 +66,68 @@
 
 	&_title {
 		position: relative;
-		z-index: 10;
+		top: 0;
+		z-index: 3;
 		margin: 0 auto;
 		max-width: 68rem;
 		color: #fff;
 		font-size: 2.827em;
 		line-height: 1.3em;
 		font-weight: 500;
-		padding: 0 8rem 8rem 4rem;
+		padding: 2rem 9rem 8rem 3rem;
 
 		box-sizing: border-box;
 
 		@media (max-width:480px) {
 			padding-right: 2rem;
+		}
+	}
+
+	&_nav {
+
+		position: absolute;
+		right: 0;
+		height: 4rem;
+
+		label {
+			display: none;
+		}
+
+		&_opener {
+			&_input {
+				display: none;
+			}
+		}
+
+		&_links {
+			display: block;
+			text-align: right;
+			margin: 0;
+			height: 4rem;
+		}
+		&_link {
+			display: inline-block;
+			padding: 0 1rem;
+			font-family: $body-font;
+			height: 4rem;
+			line-height: 4rem;
+
+			&:last-child {
+				padding-right: 0;
+			}
+
+			a {
+				display: inline-block;
+				color: $color-white;
+				border-bottom: 1px solid transparent;
+				padding: 1rem 0;
+				line-height: 2rem;
+
+				&:hover {
+					@include noUnderline();
+					border-bottom-color: $color-white;
+				}
+			}
 		}
 	}
 
@@ -112,9 +164,22 @@
 	}
 
 	&__small {
-		#{$header}_home {
 
-			top: calc(17rem + calc(var(--headerSkewInt) * -1));
+		#{$header}_nav {
+			top: calc(21.2rem + calc(var(--headerSkewInt) * -1));
+			&_link a {
+				color: $color-light-1;
+
+				&:hover {
+
+					border-bottom: none;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		#{$header}_home {
+			top: calc(19rem + calc(var(--headerSkewInt) * -1));
 
 			svg {
 				height: 2.5em;

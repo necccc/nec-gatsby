@@ -41,9 +41,6 @@ const setHeader = () => {
 const onScroll = function () {
 	document.documentElement.style.setProperty(`--scrollTop`, window.scrollY + 'px');
 	setHeader()
-
-
-
 }
 
 
@@ -61,8 +58,6 @@ exports.onInitialClientRender = () => {
 		window.addEventListener("testPassive", null, opts);
 		window.removeEventListener("testPassive", null, opts);
 	} catch (e) {}
-
-
 
 	onScroll();
     document.addEventListener('scroll', onScroll, window.supportsPassiveScroll ? { passive: true } : false);
