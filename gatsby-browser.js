@@ -27,6 +27,7 @@ const setHeader = () => {
 	const headerSkew = getHeaderSkew(headerHeight, pageWidth)
 	document.documentElement.style.setProperty(`--headerHeight`, headerHeight + 'px');
 	document.documentElement.style.setProperty(`--headerSkew`, headerSkew + 'deg');
+	document.documentElement.style.setProperty(`--headerSkewInt`, (headerSkew * 0.5) + 'rem');
 
 	if (headerSkew >= 0) {
 		header.style.setProperty(`--headerPosition`, 'fixed');
@@ -65,5 +66,8 @@ exports.onInitialClientRender = () => {
 
 	onScroll();
     document.addEventListener('scroll', onScroll, window.supportsPassiveScroll ? { passive: true } : false);
+}
 
+exports.onRouteUpdate = ({ location, prevLocation }) => {
+	onScroll();
 }
