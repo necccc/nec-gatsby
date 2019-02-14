@@ -38,7 +38,13 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors;
     }
 
-    const posts = result.data.allMdx.edges
+    const posts = result.data.allMdx.edges.filter((post) => {
+      return post.node.parent.sourceInstanceName === 'writing'
+    })
+
+    const talks = result.data.allMdx.edges.filter((post) => {
+      return post.node.parent.sourceInstanceName === 'speaking'
+    })
 
     // Create blog posts pages.
     posts.forEach(({ node }, index) => {
@@ -57,6 +63,25 @@ exports.createPages = ({ graphql, actions }) => {
         }
       })
     })
+
+    talks.forEach(({ node }, index) => {
+      const previous = index === posts.length - 1 ? null : posts[index + 1].node
+      const next = index === 0 ? null : posts[index - 1].node
+      const slug = node.fields.slug
+
+      createPage({
+        path: `/${node.parent.sourceInstanceName}${slug}`,
+        component: path.resolve("./src/templates/speaking-post.js"),
+        context: {
+          id: node.id,
+          slug,
+          previous,
+          next,
+        }
+      })
+    })
+
+
   })
 }
 

@@ -1,4 +1,4 @@
-const mdxFeed = require("gatsby-mdx/feed");
+const mdxFeed = require('gatsby-mdx/feed');
 
 module.exports = {
   siteMetadata: {
@@ -16,10 +16,18 @@ module.exports = {
   plugins: [
 
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "writing",
+        name: 'writing',
         path: `${__dirname}/content/writing`
+      }
+    },
+
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'speaking',
+        path: `${__dirname}/content/speaking`
       }
     },
 
@@ -70,12 +78,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-112128951-1",
+        trackingId: 'UA-112128951-1',
         // Puts tracking script in the head instead of the body
         head: false,
         sampleRate: 5,
         siteSpeedSampleRate: 10,
-        cookieDomain: "nec.is",
+        cookieDomain: 'nec.is',
       },
     },
     {
