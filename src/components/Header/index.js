@@ -57,9 +57,6 @@ class Header extends React.Component {
 
             <ul className={styles.header_nav_links}>
               <li className={styles.header_nav_link}>
-                <Link to="/about">about</Link>
-              </li>
-              <li className={styles.header_nav_link}>
                 <Link to="/writing">writing</Link>
               </li>
               <li className={styles.header_nav_link}>

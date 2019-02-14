@@ -1,0 +1,15 @@
+@import '../components/colors.scss';
+@import '../components/font-face.scss';
+@import '../components/mixins.scss';
+
+.intro {
+	@include article();
+
+	padding-top: 18rem;
+
+}
+
+
+.articles {
+	@include article();
+}

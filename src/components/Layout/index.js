@@ -4,11 +4,11 @@ import Footer from '../Footer'
 import Header from '../Header'
 
 const Layout = ({ title = '', children }) => (
-  <div className={styles.layout}>
+  <main className={styles.layout}>
     <Header title={title} />
     {children}
     <Footer />
-  </div>
+  </main>
 )
 
 export default Layout
