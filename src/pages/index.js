@@ -27,7 +27,7 @@ export default props => (
         </a>{' '}
         occasional <a href="/speaking">speaker</a>, hobby hardware hacker,
         photographer and Lego nerd. Senior frontend engineer at{' '}
-        <a href="https://video.ibm.com/">IBM Cloud Video</a>.
+        <a href="https://video.ibm.com/">IBM Watson Media</a>.
       </p>
     </section>
 
