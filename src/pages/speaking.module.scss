@@ -1,0 +1,92 @@
+
+@import '../components/colors.scss';
+@import '../components/font-face.scss';
+@import '../components/mixins.scss';
+
+.talks {
+	@include article();
+	padding-top: calc(var(--headerHeight) + 3rem);
+}
+
+.talk {
+	&_list {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	&_item {
+		background-color: $color-light-1;
+		padding: 1rem;
+		flex-basis: 20%;
+		overflow: hidden;
+		font-size: 1rem;
+		transition: transform .1s ease-in-out;
+
+		&:hover {
+			transform: scale(1.03);
+		}
+
+		$item: &;
+
+		h3 {
+			position: relative;
+			margin: 0 0 3rem;
+
+			#{$item}_title,
+			#{$item}_year {
+				font-family: $body-font;
+				position: relative;
+				z-index: 2;
+				display: block;
+				color: $color-white;
+			}
+
+			#{$item}_title {
+				font-weight: 700;
+			}
+
+			#{$item}_year {
+				font-size: 1.4rem;
+				font-weight: 100;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				z-index: 1;
+				top: -1rem;
+				left: -1rem;
+				width: calc(100% + 2rem);
+				height: 100%;
+				padding-bottom: 3rem;
+
+				background-color: $color-black;
+
+				transform: skewY(4deg);
+				transform-origin: top right;
+				transition: transform ease-out .07s;
+
+
+			}
+		}
+
+
+		#{$item}_topic,
+		#{$item}_date {
+			display: block;
+		}
+
+		#{$item}_topic {
+			font-family: $heading-font;
+			margin-bottom: .4rem;
+		}
+
+		#{$item}_date {
+			font-size: .8rem;
+			color: $color-light-3;
+		}
+
+	}
+}

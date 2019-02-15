@@ -45,16 +45,16 @@ const Footer = ({ title = '' }) => (
           <ul className={styles.links}>
             <li>
               <a href="/working" />
-              <a href={siteMetadata.instagramUrl}>GitHub</a>
+              <a href={siteMetadata.githubUrl}>GitHub</a>
             </li>
             <li>
               <a href={siteMetadata.instagramUrl}>Instagram</a>
             </li>
             <li>
-              <a href={siteMetadata.instagramUrl}>Twitter</a>
+              <a href={siteMetadata.twitterUrl}>Twitter</a>
             </li>
             <li>
-              <a href={siteMetadata.instagramUrl}>LinkedIn</a>
+              <a href={siteMetadata.linkedinUrl}>LinkedIn</a>
             </li>
           </ul>
         </div>

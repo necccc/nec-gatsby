@@ -17,15 +17,37 @@ const getTalks = data => {
 
 export default props => (
   <Layout title="Speaking">
-    <ul className={styles.articles}>
-      {getTalks(props.data).map(({ node }) => (
-        <li key={node.id}>
-          <Link to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}>
-            {node.frontmatter.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <section className={styles.talks}>
+      <ul className={styles.talk_list}>
+        {getTalks(props.data).map(
+          ({ node: { id, parent, fields, frontmatter } }) => (
+            <li key={id} className={styles.talk_item}>
+              <h3>
+                <Link to={`/${parent.sourceInstanceName}/${fields.slug}`}>
+                  <span className={styles.talk_item_title}>
+                    {frontmatter.title}
+                  </span>
+                  <span className={styles.talk_item_year}>
+                    {frontmatter.year}
+                  </span>
+                </Link>
+              </h3>
+
+              <p>
+                <strong className={styles.talk_item_topic}>
+                  {frontmatter.topic}
+                </strong>
+                <small className={styles.talk_item_date}>
+                  {frontmatter.date}
+                </small>
+              </p>
+
+              <p>{frontmatter.description}</p>
+            </li>
+          )
+        )}
+      </ul>
+    </section>
   </Layout>
 )
 
@@ -47,7 +69,11 @@ export const query = graphql`
           timeToRead
           frontmatter {
             title
-            date
+            year: event_start(formatString: "YYYY")
+            date: event_start(formatString: "MMMM Do, YYYY")
+            topic
+            description
+            url
           }
         }
       }
