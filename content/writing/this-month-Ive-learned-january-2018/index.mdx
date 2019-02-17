@@ -1,8 +1,7 @@
 ---
-title: This month I've learned - January
+date: "2018-02-01"
+title: "This month I've learned - January"
 description: "Loading binary data in the browser, Typed Arrays, the Web Crypto API and smaller goodies this month."
-categories:
-- writing
 tags:
 - learning
 - binary
@@ -11,24 +10,28 @@ tags:
 - fetch
 ---
 
-TL;DR, a quick summary of what’s in this month’s post:
+import Intro from "../../../src/components/Intro";
 
-- [Image data as binary](#image-as-binary-canvas)
-    - [Tainted canvas](#tainted-canvas)
-    - [XHR load array buffer](#binary-xhr)
-    - [Streaming binary data with fetch](#binary-stream-fetch)
-- [Typed arrays](#typed-arrays)
-    - [Subarray vs splice](#subarray)
-    - [Concatenating TypedArrays](#binary-concat)
-    - [Set data in TypedArrays](#set-data)
-- [Web Crypto API](#web-crypto)
-    - [Crypto libraries and performance](#crypto-libs-performance)
-- [Quick https server for your localhost using docker & nginx](#local-https)
-- [Embedding google fonts](#embed-google-fonts)
-- [Test your code against all sort of HTTP status code responses out there](#http-status)
+<Intro>
+
+
+Handling [image data as binary](#image-as-binary-canvas) for canvas, also looking into what's the [Tainted canvas](#tainted-canvas),
+how to [XHR load array buffer](#binary-xhr) and [streaming binary data with fetch](#binary-stream-fetch).
+
+Since we're working with binary data, lets take a look on [Typed arrays](#typed-arrays) and a nice feature of them,
+called [Subarray vs splice](#subarray). Working with Typed Arrays can be tricky, lets see how to [Concatenate TypedArrays](#binary-concat)
+and [Set data in TypedArrays](#set-data)
+
+With a recent project the usage of [Web Crypto API](#web-crypto) came up, so I've checked out
+how [Crypto libraries handle performance](#crypto-libs-performance).
+
+Some minor goodies: a [quick https server for your localhost using docker & nginx](#local-https),
+[embedding google fonts](#embed-google-fonts) and [testing your code against all sort of HTTP status code responses out there](#http-status)
+
+
+</Intro>
 
 This month there was a project where I needed to fetch and process the binary data of an image. We can assume this is going to be easy, as the browser can load images in image tags. As it turned out, accessing the image as binary data is not a trivial task.
-
 
 ## <a name="image-as-binary-canvas"></a> Get image data as binary
 

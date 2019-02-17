@@ -11,12 +11,15 @@ tags:
 - performance
 ---
 
+import Intro from "../../../src/components/Intro";
+
+<Intro>
 
 In some previous posts I've [introduced](/writing/graphql-with-next-js-and-apollo/) Next.js and GraphQL a bit, then showed some tips on [creating and paginating lists](/writing/next-js-apollo-graphql-performance-tuning-lists-pagination/), and quickly explained how to [load detailed data from lists, looking as instant as possible, using cache](/writing/next-js-apollo-graphql-performance-tuning-from-lists-to-details/).
 
 In this post we're still looking at a detailed view of some resource, but lets say one of the properties is an array of **other** resources, for example members of a race or a faction in Star Wars!
 
-<a name="bind-operator" class="anchor post-intro" />
+</Intro>
 
 
 this was the toughest, but if we stick to familiar react best practices, like hoisting state, it's clear

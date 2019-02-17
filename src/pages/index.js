@@ -31,37 +31,41 @@ export default props => (
       </p>
     </section>
 
-  <section className={styles.articles}>
+    <section className={styles.articles}>
+      <ul className={styles.article_grid}>
+        {getPosts(props.data).map(({ node }) => (
+          <li key={node.id} className={styles.article_grid_item}>
+            <h3>
+              <Link
+                to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}
+              >
+                {node.frontmatter.title}
+              </Link>
+            </h3>
+            <p>{node.frontmatter.description}</p>
 
-    <ul className={styles.article_grid}>
-      {getPosts(props.data).map(({ node }) => (
-        <li key={node.id} className={styles.article_grid_item}>
-          <h3>
-            <Link to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}>
-              {node.frontmatter.title}
-            </Link>
-          </h3>
-          <p>
-            {node.frontmatter.description}
-          </p>
-
-          <p><small className={styles.article_meta}>Posted on <span className={styles.article_meta_date}>{node.frontmatter.postdate}</span>{node.timeToRead} min read</small></p>
-        </li>
-      ))}
-    </ul>
-
+            <p>
+              <small className={styles.article_meta}>
+                Posted on{' '}
+                <span className={styles.article_meta_date}>
+                  {node.frontmatter.postdate}
+                </span>
+                {node.timeToRead} min read
+              </small>
+            </p>
+          </li>
+        ))}
+      </ul>
     </section>
   </Layout>
 )
 
 export const query = graphql`
   query IndexQuery {
-    allMdx (
-      sort: {
-        fields: [frontmatter___date],
-        order: ASC
-      }
-    ) {
+    allMdx(sort: {
+        fields: [frontmatter___date]
+        order: DESC
+    }) {
       edges {
         node {
           id
