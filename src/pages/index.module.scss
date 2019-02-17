@@ -13,3 +13,67 @@
 .articles {
 	@include article();
 }
+
+.article {
+	&_grid {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-gap: 2rem 4rem;
+
+		&_item {
+
+			position: relative;
+
+			h3, p {
+				position: relative;
+				z-index: 2;
+			}
+
+			a {
+				color: $color-black;
+			}
+
+			&:hover a {
+				@include underline($color-light-1, $color-blue)
+			}
+
+			&:first-child {
+				grid-column-start: 1;
+				grid-column-end: span 2;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				top: -1rem;
+				left: -1rem;
+				background-color: $color-light-1;
+				opacity: 0;
+				padding: 0;
+				transition: opacity 1 ease-in-out, padding 1 ease-in-out;
+			}
+
+			&:hover::after {
+				opacity: 1;
+				padding: 1rem;
+			}
+
+
+		}
+	}
+
+	&_meta {
+		font-size: .8rem;
+		color: $color-light-3;
+
+		&_date::after {
+			content: '\00B7';
+    		display: inline-block;
+			padding: 0 .4rem;
+		}
+	}
+
+}

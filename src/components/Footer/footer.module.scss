@@ -59,7 +59,7 @@
     }
 
     &_content {
-        font-size: .9rem;
+        font-size: $font-small;
         line-height: 1.8rem;
         display: grid;
         grid-template-columns: 10rem 1px 10rem;
