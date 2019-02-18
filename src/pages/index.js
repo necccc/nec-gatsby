@@ -17,7 +17,6 @@ const getPosts = data => {
 
 export default props => (
   <Layout title="Hi, I'm Szabolcs!">
-
     <section className={styles.intro}>
       <p>
         Mostly online as _Nec, I'm a developer from Budapest, Hungary. Organizer
@@ -55,7 +54,7 @@ export default props => (
                   {node.timeToRead} min read
                 </span>
                 <Link
-                to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}
+                  to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}
                 >
                   Read more...
                 </Link>
@@ -70,10 +69,7 @@ export default props => (
 
 export const query = graphql`
   query IndexQuery {
-    allMdx(sort: {
-        fields: [frontmatter___date]
-        order: DESC
-    }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           id

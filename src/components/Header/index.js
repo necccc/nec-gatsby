@@ -14,19 +14,22 @@ class Header extends React.Component {
       small: false,
     }
 
-    document.addEventListener(
-      'scroll',
-      () => {
-        const { small } = this.state
+    if (typeof window !== 'undefined')  {
+      window.document.addEventListener(
+        'scroll',
+        () => {
+          const { small } = this.state
+  
+          if (!small && window.scrollY >= 92) {
+            this.setState({ small: true })
+          } else if (small && window.scrollY < 92) {
+            this.setState({ small: false })
+          }
+        },
+        window.supportsPassiveScroll ? { passive: true } : false
+      )
+    }
 
-        if (!small && window.scrollY >= 92) {
-          this.setState({ small: true })
-        } else if (small && window.scrollY < 92) {
-          this.setState({ small: false })
-        }
-      },
-      window.supportsPassiveScroll ? { passive: true } : false
-    )
   }
 
   render() {

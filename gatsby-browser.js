@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-const REM = parseInt(window.getComputedStyle(document.documentElement)['font-size'], 10);
+const REM = parseInt(window.getComputedStyle(window.document.documentElement)['font-size'], 10);
 
 const getHeaderSkew = function (headerHeight, pageWidth) {
 	let aa = headerHeight - window.scrollY - (4 * REM);
@@ -20,14 +20,14 @@ const getHeaderSkew = function (headerHeight, pageWidth) {
 
 
 const setHeader = () => {
-	const header = document.querySelector('header')
-	const pageWidth = document.body.clientWidth;
+	const header = window.document.querySelector('header')
+	const pageWidth = window.document.body.clientWidth;
 
 	const headerHeight = header.clientHeight;
 	const headerSkew = getHeaderSkew(headerHeight, pageWidth)
-	document.documentElement.style.setProperty(`--headerHeight`, headerHeight + 'px');
-	document.documentElement.style.setProperty(`--headerSkew`, headerSkew + 'deg');
-	document.documentElement.style.setProperty(`--headerSkewInt`, (headerSkew * 0.5) + 'rem');
+	window.document.documentElement.style.setProperty(`--headerHeight`, headerHeight + 'px');
+	window.document.documentElement.style.setProperty(`--headerSkew`, headerSkew + 'deg');
+	window.document.documentElement.style.setProperty(`--headerSkewInt`, (headerSkew * 0.5) + 'rem');
 
 	if (headerSkew >= 0) {
 		header.style.setProperty(`--headerPosition`, 'fixed');
@@ -39,7 +39,7 @@ const setHeader = () => {
 }
 
 const onScroll = function () {
-	document.documentElement.style.setProperty(`--scrollTop`, window.scrollY + 'px');
+	window.document.documentElement.style.setProperty(`--scrollTop`, window.scrollY + 'px');
 	setHeader()
 }
 
@@ -60,7 +60,7 @@ exports.onInitialClientRender = () => {
 	} catch (e) {}
 
 	onScroll();
-    document.addEventListener('scroll', onScroll, window.supportsPassiveScroll ? { passive: true } : false);
+    window.document.addEventListener('scroll', onScroll, window.supportsPassiveScroll ? { passive: true } : false);
 }
 
 exports.onRouteUpdate = ({ location, prevLocation }) => {
