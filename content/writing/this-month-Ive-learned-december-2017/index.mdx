@@ -22,7 +22,7 @@ Not to mention that I started this blog, and needed t refresh my basic trigonome
 
 ## Helm for kubernetes
 
-{% image_tag "pull-left" "helm-logo.svg" "The Helm logo" %}
+![left](./helm-logo.svg "The Helm logo")
 
 We use kubernetes clusters to deploy and run services, but until now it was unknown for me, how exactly these services are set up. Imagine the kubernetes building blocks:
 - Docker images (in which you put your actual code and app)
@@ -100,25 +100,29 @@ But it can be turned off, using the powers of CSS!
     }
 {% endcode %}
 
-{% image_tag "pull-right" "css-font-examples.png" "examples for font-variant-ligatures, font-variant-numeric and font-variant-alternates" %}
+![right](./css-font-examples.png "examples for font-variant-ligatures, font-variant-numeric and font-variant-alternates")
 
 The best place to learn about these is the [W3 spec itself](https://www.w3.org/TR/css-fonts-3/#font-variant-ligatures-prop) and it turned out, it's a long slippery way down the rabbit hole.
 
 There's a lot of these settings and features, some really interesting:
-- **font-variant-ligatures**  
+- **font-variant-ligatures**
   there can be several ways of ligature occurence: the font designer can decide or there are historical typeface rules, or contextual, like joining letters in a script or handwriting font
-- **font-variant-numeric**  
+- **font-variant-numeric**
   how numeric characters relate to each others, like aligning kerning so they form columns of prices, or displaying fractions
-- **font-variant-alternates**  
+- **font-variant-alternates**
   the area where font designers can really play around, new design for the capital letter Q, or playing with terminating letters, or just highlighting characters
 
 Important: these are based on OpenType features, so they only work with OpenType feature enabled web fonts. Try these features on Google Fonts: [Google Font OpenType Feature Preview](http://code.thisarmy.com/fontsinfo/)
 
 What's more fun, is that ligatures power many of the emojis, combining them in a various way, for example, flags:
 
-{% blockquote 'Emoji: Fonts, Technically, Colin M. Ford' 'https://medium.com/making-faces-and-other-emoji/emoji-fonts-technically-40f3fdc0869e' %}
-Flag emoji like 🇯🇵 are ligatures of special country code glyphs called “Regional Indicators”. There are 26 of them, one for each letter of the Latin alphabet, and two combine to make a flag. For instance, there is no Unicode number for the Japanese flag emoji 🇯🇵, it is made up of two indicators: REGIONAL INDICATOR SYMBOL LETTER J + REGIONAL INDICATOR SYMBOL LETTER P.
-{% endblockquote %}
+<Blockquote
+	by={'Emoji: Fonts, Technically'}
+	link={'https://medium.com/making-faces-and-other-emoji/emoji-fonts-technically-40f3fdc0869e'}
+	linkText={'Colin M. Ford'}
+>
+	Flag emoji like 🇯🇵 are ligatures of special country code glyphs called “Regional Indicators”. There are 26 of them, one for each letter of the Latin alphabet, and two combine to make a flag. For instance, there is no Unicode number for the Japanese flag emoji 🇯🇵, it is made up of two indicators: REGIONAL INDICATOR SYMBOL LETTER J + REGIONAL INDICATOR SYMBOL LETTER P.
+</Blockquote>
 
 These are combined together using a Unicode "zero-width joiner" (`U+200D` in HTML it's `&#8205;`). If there is a connected form for two characters, putting this one in between them, causes them to appear as their connected variant. Lots of new emoji are created, using such ZWJ's, [here is the complete list of them on Unicode.org](http://www.unicode.org/emoji/charts/emoji-zwj-sequences.html)
 
@@ -132,11 +136,12 @@ For this site, I wanted to play with a skewed header and footer background, but 
 <!-- video src="{% asset_path "skew.mp4" %}" autoplay loop muted playsinline title="Short video of how the skewed header works">
 </video -->
 
-{% image_tag "pull-right" "skew-triangles.png" "The right-angled triangles, on the top and the bottom of the skewed rectangle" %}
+
+![right](./skew-triangles.png "The right-angled triangles, on the top and the bottom of the skewed rectangle")
 
 To animate these leaning layers, I have to update the css `skew` property, by a relatively small degree. If I look at this shape of a skewed background rectangle, the upper / or lower part is a simple [right-angled triangle](https://en.wikipedia.org/wiki/Right_triangle). The value I need, is the angle between it's adjacent and hypotenuse, that has the degree value to skew the background with.
 
-{% image_tag "pull-right" "sin-cos-tan.svg" "Sine, cosine and tangent basics." "https://www.mathsisfun.com/algebra/trigonometry.html" %}
+![right](./sin-cos-tan.svg "Sine, cosine and tangent basics.")
 
 Luckily, the right-angled triangle has some basic rules in trigonometry.
 
