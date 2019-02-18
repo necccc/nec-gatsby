@@ -16,13 +16,26 @@
 
 .article {
 	&_grid {
+		position: relative;
 		display: grid;
 		grid-template-columns: 50% 50%;
 		grid-gap: 2rem 4rem;
 
-		&_item {
+		&::after {
+			content: '';
+			width: 1px;
+			height: 100%;
+			position: absolute;
+			left: calc(50% + 2rem);
+			top: 0;
+			background-color: $color-light-2;
+		}
 
+
+		&_item {
 			position: relative;
+			background-color: $color-white;
+			z-index: 2;
 
 			h3, p {
 				position: relative;
@@ -40,6 +53,9 @@
 			&:first-child {
 				grid-column-start: 1;
 				grid-column-end: span 2;
+
+				border-bottom: 1px solid $color-light-2;
+				box-shadow: 0 2rem $color-white;
 			}
 
 			&::after {
@@ -60,8 +76,6 @@
 				opacity: 1;
 				padding: 1rem;
 			}
-
-
 		}
 	}
 
@@ -69,10 +83,15 @@
 		font-size: .8rem;
 		color: $color-light-3;
 
+		&_timetoread::after,
 		&_date::after {
 			content: '\00B7';
     		display: inline-block;
 			padding: 0 .4rem;
+		}
+
+		a {
+			color: $color-blue;
 		}
 	}
 

@@ -17,6 +17,7 @@ const getPosts = data => {
 
 export default props => (
   <Layout title="Hi, I'm Szabolcs!">
+
     <section className={styles.intro}>
       <p>
         Mostly online as _Nec, I'm a developer from Budapest, Hungary. Organizer
@@ -50,7 +51,14 @@ export default props => (
                 <span className={styles.article_meta_date}>
                   {node.frontmatter.postdate}
                 </span>
-                {node.timeToRead} min read
+                <span className={styles.article_meta_timetoread}>
+                  {node.timeToRead} min read
+                </span>
+                <Link
+                to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}
+                >
+                  Read more...
+                </Link>
               </small>
             </p>
           </li>
