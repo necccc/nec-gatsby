@@ -14,12 +14,12 @@ class Header extends React.Component {
       small: false,
     }
 
-    if (typeof window !== 'undefined')  {
+    if (typeof window !== 'undefined') {
       window.document.addEventListener(
         'scroll',
         () => {
           const { small } = this.state
-  
+
           if (!small && window.scrollY >= 92) {
             this.setState({ small: true })
           } else if (small && window.scrollY < 92) {
@@ -29,7 +29,10 @@ class Header extends React.Component {
         window.supportsPassiveScroll ? { passive: true } : false
       )
     }
+  }
 
+  componentWillUnmount() {
+    // remove scroll event listener
   }
 
   render() {

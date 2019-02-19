@@ -37,7 +37,7 @@ export default props => (
           <li key={node.id} className={styles.article_grid_item}>
             <h3>
               <Link
-                to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}
+                to={`/${node.parent.sourceInstanceName}${node.fields.slug}`}
               >
                 {node.frontmatter.title}
               </Link>
@@ -54,7 +54,7 @@ export default props => (
                   {node.timeToRead} min read
                 </span>
                 <Link
-                  to={`/${node.parent.sourceInstanceName}/${node.fields.slug}`}
+                  to={`/${node.parent.sourceInstanceName}${node.fields.slug}`}
                 >
                   Read more...
                 </Link>

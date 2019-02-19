@@ -166,7 +166,8 @@
 	&__small {
 
 		#{$header}_nav {
-			top: calc(21.2rem + calc(var(--headerSkewInt) * -1));
+			bottom: calc(calc(var(--headerHeight) * -1) + 5rem);
+
 			&_link a {
 				color: $color-light-1;
 
@@ -179,7 +180,9 @@
 		}
 
 		#{$header}_home {
-			top: calc(19rem + calc(var(--headerSkewInt) * -1));
+			position: absolute;
+			top: auto;
+			bottom: calc(calc(var(--headerHeight) * -1) + calc(11.3rem - calc(5rem * var(--headerScrollRatio))));
 
 			svg {
 				height: 2.5em;

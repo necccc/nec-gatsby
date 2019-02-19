@@ -18,6 +18,13 @@ const getHeaderSkew = function (headerHeight, pageWidth) {
 	return skew >= 0 ? 0 : skew
 }
 
+const getHeaderScrollRatio = (headerHeight) => {
+	const ratio  = (headerHeight - window.scrollY) / headerHeight
+
+	if (ratio < 0) return 0;
+
+	return ratio
+}
 
 const setHeader = () => {
 	const header = window.document.querySelector('header')
@@ -25,9 +32,12 @@ const setHeader = () => {
 
 	const headerHeight = header.clientHeight;
 	const headerSkew = getHeaderSkew(headerHeight, pageWidth)
+
 	window.document.documentElement.style.setProperty(`--headerHeight`, headerHeight + 'px');
 	window.document.documentElement.style.setProperty(`--headerSkew`, headerSkew + 'deg');
-	window.document.documentElement.style.setProperty(`--headerSkewInt`, (headerSkew * 0.5) + 'rem');
+
+
+	window.document.documentElement.style.setProperty(`--headerScrollRatio`, getHeaderScrollRatio(headerHeight));
 
 	if (headerSkew >= 0) {
 		header.style.setProperty(`--headerPosition`, 'fixed');
@@ -43,8 +53,6 @@ const onScroll = function () {
 	setHeader()
 }
 
-
-// You can delete this file if you're not using it
 exports.onInitialClientRender = () => {
 	// Test via a getter in the options object to see if the passive property is accessed
 	window.supportsPassiveScroll = false;
