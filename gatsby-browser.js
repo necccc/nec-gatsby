@@ -3,6 +3,9 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
+
+ // https://www.gatsbyjs.org/packages/gatsby-remark-custom-blocks/?=remark
+
 const REM = parseInt(window.getComputedStyle(window.document.documentElement)['font-size'], 10);
 
 const getHeaderSkew = function (headerHeight, pageWidth) {
