@@ -30,7 +30,10 @@ const getHeaderScrollRatio = (headerHeight) => {
 }
 
 const setHeader = () => {
-	const header = window.document.querySelector('header')
+	const header = window.document.querySelector('header');
+
+	if (!header) return;
+
 	const pageWidth = window.document.body.clientWidth;
 
 	const headerHeight = header.clientHeight;
@@ -38,8 +41,6 @@ const setHeader = () => {
 
 	window.document.documentElement.style.setProperty(`--headerHeight`, headerHeight + 'px');
 	window.document.documentElement.style.setProperty(`--headerSkew`, headerSkew + 'deg');
-
-
 	window.document.documentElement.style.setProperty(`--headerScrollRatio`, getHeaderScrollRatio(headerHeight));
 
 	if (headerSkew >= 0) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import MDXRenderer from 'gatsby-mdx/mdx-renderer'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/Layout'
 import ArticleContent from '../components/ArticleContent'
 import ArticleMeta from '../components/ArticleMeta'
@@ -18,7 +18,7 @@ function PostPageTemplate({ data: { mdx } }) {
   return (
     <Layout title={title}>
       <ArticleContent>
-        <MDXRenderer components={components}>{mdx.code.body}</MDXRenderer>
+        <MDXRenderer components={components}>{mdx.body}</MDXRenderer>
       </ArticleContent>
     </Layout>
   )
