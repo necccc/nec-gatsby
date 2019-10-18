@@ -1,5 +1,3 @@
-const mdxFeed = require('gatsby-mdx/feed');
-
 module.exports = {
   siteMetadata: {
     title: '_Nec',
@@ -47,9 +45,8 @@ module.exports = {
       },
     },
 
-
     {
-      resolve: `gatsby-mdx`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: ['.mdx', '.md'],
         gatsbyRemarkPlugins: [
@@ -58,6 +55,19 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-smartypants`,
+          },
+          {
+            resolve: "gatsby-remark-embed-gist",
+            options: {
+              // Optional:
+
+              // the github handler whose gists are to be accessed
+              username: 'necccc',
+
+              // a flag indicating whether the github default gist css should be included or not
+              // default: true
+              includeDefaultCss: true
+            },
           },
           {
             resolve: `gatsby-remark-images`,
@@ -174,6 +184,22 @@ module.exports = {
             include: `${__dirname}/src/images`,
           }
       }
-    }
+    },
+
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Libre Baskerville`,
+            variants: [`400`,`700`],
+          },
+          {
+            family: `Libre Franklin`,
+            variants: [`300`,`500`]
+          },
+        ],
+      },
+    },
   ],
 }

@@ -40,9 +40,7 @@ export const pageQuery = graphql`
         tags
       }
       id
-      code {
-        body
-      }
+      body
     }
   }
 `
