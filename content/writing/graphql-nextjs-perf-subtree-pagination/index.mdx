@@ -40,8 +40,6 @@ on state change, flip the skip flag, update the page metadata, and let the relat
 
 
 
-
-
 ## Subtree Pagination
 
 We should not query every member of the Rebel Alliance for this page, only the first ten maybe, and let the user browse them later. Displaying so much data on a single page wouldn't be just weird UX, but resolving all those members might take several seconds for our GraphQL server.
@@ -53,30 +51,7 @@ _(Note: In these examples our GraphQL server resolves Types and fields from a RE
 
 We can tell the GraphQL server to resolve the first 10 only, and use some paging parameters to fetch more items later. Lets see this on the Species type in our Star Wars Schema!
 
-```graphql
-
-type Species {
-    id: ID
-    name: String
-    classification: String
-    homeworld: Planet
-    designation: String
-    language: String
-    average_height: String
-    average_lifespan: String
-    picture: String
-
-    # the 'people' field contains all members of a Species
-    # the query for this field accepts two parameters,
-    # - pick the first n items
-    # - starting from an offset
-    #
-    # by default it will get the first 10 Persons
-    people(first: Int = 10 offset: Int = 0): [Person]
-
-    peopleCount: Int
-}
-```
+`gist:529272f6ce6742cfecdee708eff271d6#species.graphql`
 
 Our first query can run without any parameters, because it will use the default values. Later we can fetch this field only, updating the paging parameters.
 
@@ -90,121 +65,12 @@ To solve this, we create a small component with the list of the members, and the
  - **onLoadMore**, a function to call, to init the query for the next page of people
  - **skip**, this prop indicates if the component should skip fetching data, since it's getting it from the parent component of first load
 
-```jsx
-
-    <RelatedPeople
-        id={ '' }
-        pageData={{
-            first,
-            offse,
-            total
-        }}
-        data={ [ {}, {} ] }
-        onLoadMore={ () => {} }
-        skip={ true }
-    />
-
-
-
-```
+`gist:529272f6ce6742cfecdee708eff271d6#RelatedPeople.jsx`
 
 Now we can use this component on our detail page!
 
-```jsx
-    // SpeciesDetails component
+`gist:529272f6ce6742cfecdee708eff271d6#SpeciesDetails.js`
 
-    class SpeciesDetails extends React.Component {
-        render() {
-            const { species } = this.props.data
-
-            return (<div>
-                <h1>{species.name}</h1>
-
-                <img src="{starship.picture}" />
-
-                <ul>
-                    <li>Homeworld: {species.homeworld}</li>
-                    <li>Language: {species.language}</li>
-                    <li>Classification: {species.classification}</li>
-                    <li>Average Height: {species.average_height}</li>
-                </ul>
-
-                <h2>Members</h2>
-
-                <RelatedPeople
-                    id={ species.id }
-                    pageData={{
-                        first,
-                        offse,
-                        total
-                    }}
-                    data={ species.people }
-                    onLoadMore={ () => this.onLoadMore() }
-                    skip={ relatedPeople.skip }
-                />
-            </div>)
-        }
-
-        onLoadMore() {}
-    }
-
-    /*
-        the rest below is basically the same as in the previous post in this series
-        - setting the initial prop with next.js
-        - preparing the graphql query
-        - composing our page component with the queries, trying to fetch from cache first
-    */
-
-    SpeciesDetails.getInitialProps = async function ({ query }) {
-        return {
-            id: query.id
-        }
-    }
-
-    const queryParams = {
-        options: props => {
-            return {
-                // get notified if the GraphQL Query is in loading state
-                notifyOnNetworkStatusChange: true,
-                // put the ID from the props, to the variables, so the Query receives it
-                variables: {
-                    id: props.id
-                },
-            }
-        }
-    }
-
-    const getSpeciesQuick = gql`
-        query getSpeciesQuick($id: ID) {
-            Species(id: $id) {
-                id
-                name
-            }
-        }
-    `
-    const getSpeciesFull = gql`
-        query getSpeciesFull($id: ID) {
-            Species(id: $id) {
-                id
-                name
-                classification
-                homeworld
-                average_height
-                language
-                people {
-                    id
-                    name
-                    picture
-                }
-            }
-        }
-    `
-    export default compose(
-        graphql(getSpeciesQuick, queryParams),
-        graphql(getSpeciesFull, queryParams)
-    )(SpeciesDetails)
-
-```
 
 Note the full query, we include the field `people`, with their id, name and picture only.
 

@@ -11,14 +11,15 @@
 
 
 .articles {
-	@include article();
+  @include article();
+  padding-bottom: 4rem;
 }
 
 .article {
 	&_grid {
 		position: relative;
 		display: grid;
-		grid-template-columns: 50% 50%;
+		grid-template-columns: 1fr 1fr;
 		grid-gap: 2rem 4rem;
 
 		&::after {
@@ -26,7 +27,7 @@
 			width: 1px;
 			height: 100%;
 			position: absolute;
-			left: calc(50% + 2rem);
+			left: 50%;
 			top: 0;
 			background-color: $color-light-2;
 		}

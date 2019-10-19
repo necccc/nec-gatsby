@@ -22,7 +22,7 @@
         bottom: 0;
         top: -7rem;
         transform: skewY(4deg);
-		transform-origin: bottom left;
+		    transform-origin: bottom left;
         transition: transform ease-out .1s;
     }
 
@@ -60,7 +60,7 @@
 
     &_content {
         font-size: $font-small;
-        line-height: 1.8rem;
+        line-height: 1.6 * $font-small;
         display: grid;
         grid-template-columns: 10rem 1px 10rem;
         grid-gap: 10%;
@@ -72,35 +72,40 @@
 
 		.farewell {
 			grid-column: span 3;
-            grid-row: 1;
+      grid-row: 1;
 			font-family: $body-font;
 			margin:  0;
 			font-size: 1.3rem;
 			margin: 1rem 0;
 		}
 
-        hr {
-            display: block;
+    hr {
+      display: block;
 
-            border-style: solid;
-            border-width: 0 0 0 1px;
-            border-color:lighten($color-black, 60%);
+      border-style: solid;
+      border-width: 0 0 0 1px;
+      border-color:lighten($color-black, 60%);
 
-            @media (max-width:480px) {
-                display: none;
-            }
-        }
+      @media (max-width:480px) {
+        display: none;
+      }
+    }
 
 		.about,
 		.links, {
-            position: relative;
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
 
-            &:last-child::after {
-                display: none;
-            }
+
+      &:last-child::after {
+          display: none;
+      }
+
+      li {
+        line-height: 1.8 * $font-small;
+      }
 		}
 
 		.about {

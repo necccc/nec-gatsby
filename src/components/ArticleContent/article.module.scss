@@ -50,5 +50,9 @@
 
 	strong {
 		font-weight: 700;
-	}
+  }
+
+  :global {
+    @import './gist-embed.scss';
+  }
 }
