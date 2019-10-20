@@ -23,9 +23,10 @@ But I've seen the question appear from several sources: "Okay okay, we got async
 </Intro>
 
 
+
 ## Let it throw
 
-![left](./let-it-throw.gif "Elza handling async errors properly")
+![Small scene from the movie "Frozen", with Elza handling async errors properly](./let-it-throw.gif "left")
 
 Yup, that's it!
 
@@ -36,7 +37,9 @@ Just let your async operations `throw` an error, these errors will travel up the
 You can handle these errors there, log them, and let the user know about the error in some way.
 
 
+
 `gist:9f2594c8a5a2c9247f5de9e3800a619a`
+
 
 
 ## Explanation
@@ -47,8 +50,6 @@ In JavaScript a really clean way to code is to stick to this simple rule: Operat
 - throw an error
 
 Think about it: if a function returns an error, what would that mean? The result of a process is an error? Can we store it to a database, pass it along to the user? Sure, we can type check for errors all the time, but that sounds tedious, and thankfully the somewhat-similar error-first approach is slowly behind us.
-
-![right](./let-it-throw.gif "Elza handling async errors propery")
 
 
 

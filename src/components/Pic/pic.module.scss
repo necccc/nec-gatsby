@@ -4,7 +4,7 @@
 .image {
     margin-bottom: 4rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid lighten($color-black, 75%);
+    // border-bottom: 1px solid lighten($color-black, 75%);
 
     &_description {
         display: block;
@@ -13,7 +13,8 @@
         font-size: .8rem;
         color: lighten($color-black, 50%);
         text-align: left;
-        line-height: 1.5rem;
+        line-height: 1.2rem;
+        padding-bottom: 1rem;
     }
 
     &__pull_left,
@@ -27,6 +28,7 @@
 
         img {
             max-width: 100%;
+            margin-bottom: .5rem;
         }
     }
 
