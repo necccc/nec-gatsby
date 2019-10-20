@@ -22,16 +22,15 @@ This and the following posts are the summary I learned about some performance-tu
 </Intro>
 
 
-
-
-
 ## Next.js & GraphQL & Apollo
 
 First let's have a quick intro on the building blocks: Next.js, GraphQL and the Apollo suite for GraphQL. I promise I'll list some great resources on these later in this post.
 
 ### Next.js
 
-![right](./nextjs.svg "The Next.js logo")
+
+![The Next.js logo](./nextjs.svg "right")
+
 
 [Next.js](https://nextjs.org/) is a framework for server-rendered React apps - it can generate static sites too, but it works great with dynamic sites as well. A powerful Webpack setup, Server-side rendered React and routing packed together to a small framework. If you want to elaborate things and get more dynamic, you can plug it on a web framework like Express, Hapi or Koa, and use their routing, middleware, everything.
 
@@ -45,31 +44,27 @@ As for development experience, it provides a dev mode, where Webpack HMR shines 
 
 
 
-
-
-
-
-
 <a name="graphql" class="anchor" />
 
 ### GraphQL
 
-![right](./graphql.svg "GraphQL logo")
+![GraphQL logo](./graphql.svg "left")
+
 
 Facebook came up with GraphQL few years ago, to solve their problems around verbose and network draining APIs. It's not a framework, nor a library, its just a **query language** and as such, can be implemented in several languages fro both server-side and client-side.
 
 GraphQL aims to solve several painful problems around APIs:
 
-- **you ask for what you need, and you receive only what you need**  
+- **you ask for what you need, and you receive only what you need**
 This solves the so called _overfetching_ phenomenon, when a RESTful API endpoint gives you tons of properties, but you need only the name and the picture of an item.
 
-- **single endpoint, single request, many resources**  
+- **single endpoint, single request, many resources**
 You can ask for as many types of resources as many you want in just a single Query! Resources will be resolved from other REST APIs, database connections - and you don't have to know about them.
 
-- **Schema with a type system**  
+- **Schema with a type system**
 The Schema holds all the Types of resources, properties, possible variables you can use, even caching hints! It ensures meaningful errors if you misspell something, and provides predictable data types.
 
-- **API development without versioning**  
+- **API development without versioning**
 You can add new properties or fields or even whole Types without deprecating the whole API, and vice versa: you can mark fields as `@deprecated` so clients will know about the upcoming changes while remaining operational.
 
 ### Really quick GraphQL intro
@@ -78,162 +73,20 @@ GraphQL has two types of operations, Query (read) and Mutation (write). These ar
 
 I'll quickly explain the basic terms of GraphQL with some examples. First, lets see the Schema, defining a GraphQL service:
 
-```graphql
-# Schema definition
-#
-# Fist, we define a resource Type, called Person
-type Person  {
-	id: ID!
-	# this is a Field of Scalar Type String,
-	# the ! shows it cannot be null
-	name: String!
-	# this is a Field of Scalar Type Integer
-	height: Int
-	bio: String
-	picture: String
-}
 
-# this resource Type has a relation with another resource Type
-type Starship  {
-	id: ID!
-	name: String!
-	model: String
-	picture: String
-	owner: Person    # this field will contain data of a Person type
-}
-
-# the root Query, every QraphQL service has one
-# listing the resources available for fetching:
-type Query {
-	# will return with Person with
-	# the ID passed in the argument
-	Person(id: ID): Person
-
-	# this query will return a list (array) of Persons,
-	# default page is 1
-	allPersons(page: Int = 1): [ Person ]
-
-	# will return with Starship with
-	# the ID passed in the argument
-	Starship(id: ID): Starship
-}
+`gist:16693ae8e32a550defd16c36f10d8367#intro.graphql`
 
 
-# Schemas for Mutations
-#
-# like the root Query, there is a root Mutation type,
-# for every service, that shows what data can be mutated and how
-type Mutation {
-
-	# mutations can use your resource Types as schemas,
-	# since they already define their fields and types
-
-	# this can be away to create a Person,
-	# but you might get lost in the parameters,
-	# so I would advise against it
-	addPerson(name: String!, height: Int, bio: String, picture: String ): Person
-}
+These above helps you define a GraphQL service, the Schema, which you can read as a client,
+to see the types, names and fields as a living documentation. Now let's see some Query and Mutation operations
+form the client's perspective!
 
 
-# create a new kind of Type instead, an Input Type!
-# this defines a data schema that will be sent to the server
-# as a new record, or record update
-input CreatePerson {
-	name: String!
-	picture: String
-	height: Int
-	bio: String
-}
-
-# now the addPerson Mutation from earlier can be this
-type Mutation {
-
-	addPerson(person: CreatePerson): Person!
-
-	# this Mutation returns a Person Type resource as a response
-	# the new Person that has been created
-}
-
-```
-
-These above helps you define a GraphQL service, the Schema, which you can read as a client, to see the types, names and fields as a living documentation. Now let's see some Query and Mutation operations form the client's perspective!
-
-```graphql
-
-# Queries
-#
-# fetch some fields of a resource with an id
-# this will return only the ID and the name of the Person
-query PersonMinimal($id: ID) { # this is the name of the query
-    Person(id: $id) {          # this is the actual resource you're getting
-		id
-		name
-    }
-}
-
-# same resource type, but with all fields
-query PersonFull($id: ID) {
-    Person(id: $id) {
-		id
-		name
-		picture
-		bio
-		height
-    }
-}
-
-# get the list of Persons
-# arguments will be passed in with the help of your client library
-# in this case if the page argument is not present,
-# the default value is 1
-query PersonList($page: Int = 1) {
-	allPersons(page: $page) {
-		id
-		name
-		picture
-	}
-}
-
-# get a Starship with its pilot Person!
-# We only need the person's id, picture and name,
-# we don't need height and full bio here.
-# This is best part of GraphQL!
-query getStarship($id: ID) {
-	Starship(id: $id) {
-		id
-		name
-		model
-		picture
-		owner { # here a Person type will be served
-			id
-			name
-			picture
-		}
-	}
-}
+`gist:16693ae8e32a550defd16c36f10d8367#queries_and_mutations.graphql`
 
 
-# lets have a mutation
-# we'll use the CreatePerson Input Type that was defined in the schema
-mutation UploadNewPerson($person: CreatePerson) {
-  addPerson(person: $person) {
-    name # we will use only the name from the newly created and returned Person entry
-  }
-}
-
-# for this mutation, this parameter provides the new Person data
-# it has to match the CreatePerson type scheme
-{
-  "person": {
-    "name": "Kara Thrace",
-    "picture": "https://img.url/kara.png",
-    "height": 173
-	}
-}
-
-```
-
-There are more details and useful features, that could fill a whole blogpost, be sure to check out the [official GraphQL docs](http://graphql.github.io/)!
+There are more details and useful features, that could fill a whole blogpost,
+be sure to check out the [official GraphQL docs](http://graphql.github.io/)!
 
 
 
@@ -248,7 +101,7 @@ There are more details and useful features, that could fill a whole blogpost, be
 
 ### Apollo
 
-![right](./apollo.svg "Apollo Platform logo")
+![The Apollo Platform logo](./apollo.svg "right")
 
 [Apollo Platform](https://www.apollographql.com/) is a GraphQL toolset that works great with REST APIs as backend resources. They have Server and Client available for free and open source, plus the Apollo Engine, which does caching, tracing and metrics really well - for a price.
 
@@ -260,7 +113,7 @@ Resolvers can fetch whole resource Types, or even fields within Types. You can b
 
 This means the Server needs two things to max out performance and debuggability:
 
-1. caching  
+1. caching
 2. tracing and metrics
 
 **Caching**
@@ -268,24 +121,9 @@ going for a REST API endpoint over and over again for the same data is far from 
 
 Luckily, we can use another feature of the GraphQL language, called _directives_. Using cache directives in the Schema definition, we can tell the server what to cache and for how long - and is it cacheable for everyone (public) or for a certain user session (private).
 
-```graphql
 
-# cache this kind of resource for an hour
-type Person@cacheControl(maxAge: 3600) {
-    id: ID!
-    name: String!
-    height: Int
-    bio: String
+`gist:16693ae8e32a550defd16c36f10d8367#directives.graphql`
 
-	# cache the image field for a week
-    picture: String @cacheControl(maxAge: 10080)
-
-	# add an extra field, which tells if the current user favourited this Person
-	# this will be cached for the current user session only
-	userFavourite: Boolean! @cacheControl(scope: PRIVATE)
-}
-
-```
 
 _**Note:** cache directives are not the part of the GraphQL language. Caching is done by [Apollo Cache Control](https://github.com/apollographql/apollo-cache-control) which builds upon the **extendibility** of GraphQL, meaning that you can write your own directives!_
 
@@ -303,36 +141,11 @@ Since Next.js is focused on React, I've used the `react-apollo` package in my ex
 
 Apollo promotes the usage of the `<Query />` and `<Mutation />` component with your components, but if you like to separate your logic from your components, you can use the plain simple `graphql` HOC, to combine your components.
 
-```jsx
 
-const QUERY_PERSON_LIST = gql`
-query PersonList($page: Int = 1) {
-	allPersons(page: $page) {
-		id
-		name
-		picture
-	}
-}
-`
 
-// same Query used with the Query Component
+`gist:16693ae8e32a550defd16c36f10d8367#react-graphql.jsx`
 
-export default PersonListing = () => (
-	<Query query={QUERY_PERSON_LIST}>
-		{({ loading, error, data }) => {
-			if (error) return <Error />
-			if (loading || !data) return <Loading />
 
-			return <PersonList people={data.allPersons} />
-		}}
-	</Query>
-)
-
-// Used with the graphql method
-
-export default graphql(QUERY_PERSON_LIST, PersonList)
-
-```
 
 I personally prefer the plain `graphql` method, becuse later on when you start to split queries, or create more complex ones, you have the option to separate the component rendering logic from the data fetching.
 

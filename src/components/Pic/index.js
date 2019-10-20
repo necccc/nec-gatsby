@@ -7,16 +7,9 @@ const Pic = ({ alt, src, title }) => {
   classNames.push(styles[`image__pull_${title}`])
 
   return (
-    <span className={ classNames.join(' ') }>
-      <img
-        src={ src }
-        alt={ alt }
-      />
-      <small
-        className={ styles.image_description }
-      >
-        { alt }
-      </small>
+    <span className={classNames.join(' ')}>
+      <img src={src} alt={alt} />
+      <small className={styles.description}>{alt}</small>
     </span>
   )
 }

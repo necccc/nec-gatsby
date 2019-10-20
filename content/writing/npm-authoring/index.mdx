@@ -7,6 +7,7 @@ tags:
 - packages
 ---
 
+import Blockquote from "../../../src/components/Blockquote";
 import Intro from "../../../src/components/Intro";
 
 <Intro>
@@ -21,7 +22,9 @@ This is a comprehensive guide on npm authoring, not just for beginners. I'll vis
 
 ## Define what to publish
 
-![right](./node-modules.jpg "node_modules folder vs black hole joke, a classic!")
+
+![node_modules folder vs black hole joke, a classic!](./node-modules.jpg "right")
+
 
 Know more jokes like this? We can work on this issue, if we define what should be in the package, that goes up to npm and what stays in the git repository. With a simple, rule of thumb:
 - code, that is actually needed for the module, should go to npm
@@ -39,42 +42,21 @@ These can stay in the git repository. Anyone who needs a closer look on your mod
 
 To tell npm what should be packaged, use the  `files` field in the `package.json`. Content of `files` is an array of files and folders, relative to the `package.json` file. List your folders and assets that are part of the module, or need for installing or building code if necessary.
 
-{% code json %}
 
-    {
-        "files": [
-            "dist",
-            "src"
-        ]
-    }
-{% endcode %}
+`gist:785b92c93320596090fc233e44b35f98#package-files.json`
+
+
 
 ### Targets
 
-Is your module targeted for the browser, or node, or both? The `main` and the `browser` fields in your `package.json` file are here to help you define which module is targeted for the browser and which one is for Node.js within the package. 
+Is your module targeted for the browser, or node, or both? The `main` and the `browser` fields in your `package.json` file are here to help you define which module is targeted for the browser and which one is for Node.js within the package.
 
 According to the [specs](https://github.com/defunctzombie/package-browser-field-spec) on `package.json` files, bundlers should parse and use the content of the `browser` field. It can be used to provide an alternate main entry point to the package itself, or just replace parts of the package when the bundler loads it targeted to browser environments.
 
 Recently the `module` field got introduced, where you can point bundlers towards your code, which is in the new [ECMAScript Modules](http://exploringjs.com/es6/ch_modules.html) format.
 
-{% code js %}
 
-    {
-        // your module compiled to commonJS
-        "main": "dist/module.js"
-
-        "browser": {
-            // use a request-like module based on Fetch in the browser
-            "request": "./shims/request-with-fetch.js",
-
-            // basically this happens
-            "code-for-node.js": "code-for-browser.js"
-        },
-
-        // your code in ES Modules format
-        "module": "esm/module.js"
-    }
-{% endcode %}
+`gist:785b92c93320596090fc233e44b35f98#package-targets.json`
 
 
 _(You're right, the comments I've used in JSON are totally invalid, look at them as presentational decoration, and let's call it pseudo-json from now on)_
@@ -105,31 +87,19 @@ To solve this, you can list these tools in `devDependencies`, npm installs them 
 
 npm comes with a new tool called `npx`, written by @zkat, and it can help you with this! Here's what it does:
 
-{% blockquote 'npx by Kat Marchán' 'https://github.com/zkat/npx' %}
+<Blockquote
+  by="Kat Marchán"
+  link="https://github.com/zkat/npx"
+  linkText="npx"
+>
     Executes `command` either from a local node_modules/.bin, or from a central cache, installing any packages needed in order for `command` to run.
-{% endblockquote %}
+</Blockquote>
 
 See this example, where all scripts do the same, using global modules, local paths or npx:
 
-{% code js %}
 
-    {
-        "scripts": {
+`gist:785b92c93320596090fc233e44b35f98#package-scripts.json`
 
-            // using babel as a global module or local dependency,
-            // exits with an error if the host hasn't installed depdencies or installed babel as global
-            "babel": "babel src --out dist",
-
-            // using babel as a local dependency
-            // works even if there is no global babel installed
-            "babel": "./node_modules/babel-cli/bin/babel src --out dist"
-
-            // using npx
-            // same as the previous one, but much shorter, nicer and readable
-            "babel": "npx babel src --out dist"
-        }
-    }
-{% endcode %}
 
 <a name="lifecycle-scripts"  class="anchor"></a>
 
@@ -150,28 +120,9 @@ every field in the `scripts` can be invoked by running `npm run yourscript`. The
 - **pre-post hooks**
 you can take any lifecycle command, or any field from the `scripts` and prefix it with `pre` or `post`.  They will run before and after the mentioned script, so you don’t have to call them explicitly. This makes your scripts shorter and cleaner
 
-{% code js %}
 
-    {
-        "scripts": {
-            // these can be ran outside the 'run' command
-            "start": "",
-            "stop": "",
-            "test": "",
+![Complete order of lifecycle scripts of npm install and publish](./lifecycle.svg "full")
 
-            // these are accessibe via 'npm run ...'
-            "build": "",
-            "clean": "",
-
-            // these run before or after the scripts they are bound to by name
-            "prebuild": "",
-            "preclean": "",
-            "postclean": "",
-        }
-    }
-{% endcode %}
-
-{% image_tag "full" "lifecycle.svg" "Complete order of lifecycle scripts of npm install and publish" %}
 
 Quick advice on these scripts:
 - `prepublish` has been deprecated, use `prepare`, or `prepublishOnly`
@@ -192,7 +143,7 @@ Be careful what you implement here, as they run on every install run, even if it
 
 ### Versioning, semver
 
-Suppose your code is done, built, tested and ready for publishing by now. Awesome, you’re doing great! 
+Suppose your code is done, built, tested and ready for publishing by now. Awesome, you’re doing great!
 
 To keep the integrity and reliability of your module, it’s important to set the next version in a way, that reflect the changes in the module. For this, the [semver](https://semver.org/) is a great tool. To sum it up:
 
@@ -201,9 +152,17 @@ To keep the integrity and reliability of your module, it’s important to set th
 - **minor** means new features, it should be compatible with the same major versions
 - **patch** means bugfix, cleanup etc
 
-{% blockquote Stephan Bönnemann https://speakerdeck.com/boennemann/we-fail-to-follow-semver-and-why-it-neednt-matter-1 The German word for fear of increasing the major version number %}
-    Hauptversionsnummernerhöhungsangst
-{% endblockquote %}
+
+<Blockquote
+  by="Stephan Bönnemann"
+  linkText="The German word for fear of increasing the major version number"
+  link="https://speakerdeck.com/boennemann/we-fail-to-follow-semver-and-why-it-neednt-matter-1"
+>
+  Hauptversionsnummernerhöhungsangst
+</Blockquote>
+
+
+
 
 If you like named releases, nice version numbers, use those for your customers, but developers and the npm registry will use semver. Update it every time your code changes in any way.
 
@@ -235,32 +194,14 @@ Stephan Bönnemann came up with this great tool called [semantic-release](https:
 
 Let's say you encounter a bug in your module, you fix it, release it, and want to encourage everyone to use the new version. npm can help you with this by allowing you to *deprecate* module versions. You can deprecate certain versions, or complete version ranges if necessary using the `npm deprecate` command.
 
-{% code bash %}
 
-    # deprecate a single version
-    npm deprecate my-module@1.0.3 "this version is not supported any more, pelase update"
+`gist:785b92c93320596090fc233e44b35f98#deprecate.sh`
 
-    # deprecate everything below a version
-    # mind the double-qoutes around the version information!
-    npm deprecate my-module@"< 1.0.4" "critical bug fixed in 1.0.4, please update"
-
-{% endcode %}
 
 After this, it will show up in the install log as this
 
-{% code bash %}
 
-$ npm i my-module@1.0.2
-npm http fetch GET 200 http://registry.npmjs.org/my-module 760ms
-npm WARN deprecated my-module@1.0.2: critical bug fixed in 1.0.4, please update
-
-{% endcode %}
-
-
-
-
-
-
+`gist:785b92c93320596090fc233e44b35f98#deprecate_warn.sh`
 
 
 ## Destinations for publishing
@@ -273,27 +214,19 @@ After detailing what to publish and how lets take a quick look at the “Where t
 
 npm allows you to create organizations, where you can release packages. Called _'scoped packages'_, they will appear under the organizaton name, using a notation like this: `@myorg/packagename`. This has a few perks, like:
 
-- publish packages under a **namespace**, where they won’t conflict with public package names  
+- publish packages under a **namespace**, where they won’t conflict with public package names
 - group packages that are related to a **service, app or team**
 - you can add package **maintainers, contributors, and teammates** to your organization
 - create **private packages**, accessible only to organization members *(note: this is a paid feature)*
 
 Here’s a quick start guide to scoped packages.
 
-{% code bash %}
 
-    # log in to an org
-    npm login --scope=@myorg
+`gist:785b92c93320596090fc233e44b35f98#scoped_package.sh`
 
-    # init an npm project within a scope/org
-    npm init --scope=myorg
 
-    # publish a scoped, and public package
-    npm publish --access=public
+<a name="private-registry" class="anchor"></a>
 
-{% endcode %}
-
-<a name="private-registry" class="anchor"></a> 
 ### Private registry
 
 If your organization needs one, private registries are available by npm, called npm enterprise. Its a self-hosted solution (you have to install/maintain the server) or use it as part of npm’s SaaS products, and let them host it for you.
@@ -309,17 +242,15 @@ While using a private npm registry, two configuration options can be really usef
 
 
 
-
-
 ## Wrap-up & Links
 
 I hope I could provide some useful tips for everyone regardless of your npm-fu - if you have any questions, feel free to hit me, contact details are down below.
 
 Here are some useful links with further information on how npm covers authoring:
 
-[package.json | npm Documentation](https://docs.npmjs.com/files/package.json)
-[GitHub - defunctzombie/package-browser-field-spec: Spec document for the ‘browser’ field in package.json](https://github.com/defunctzombie/package-browser-field-spec)
-[GitHub - zkat/npx: execute npm package binaries](https://github.com/zkat/npx)
-[scripts | npm Documentation](https://docs.npmjs.com/misc/scripts)
-[Semantic Versioning 2.0.0 | Semantic Versioning](https://semver.org/)
-[version | npm Documentation](https://docs.npmjs.com/cli/version)
+- [package.json | npm Documentation](https://docs.npmjs.com/files/package.json)
+- [GitHub - defunctzombie/package-browser-field-spec: Spec document for the ‘browser’ field in package.json](https://github.com/defunctzombie/package-browser-field-spec)
+- [GitHub - zkat/npx: execute npm package binaries](https://github.com/zkat/npx)
+- [scripts | npm Documentation](https://docs.npmjs.com/misc/scripts)
+- [Semantic Versioning 2.0.0 | Semantic Versioning](https://semver.org/)
+- [version | npm Documentation](https://docs.npmjs.com/cli/version)

@@ -19,8 +19,9 @@ export default props => (
   <Layout title="Hi, I'm Szabolcs!">
     <section className={styles.intro}>
       <p>
-        Mostly online as <a href="https://twitter.com/_Nec">_Nec</a>, I'm a developer from Budapest, Hungary. Organizer
-        and curator of <a href="http://jsconfbp.com/">JSConf Budapest</a> and{' '}
+        Mostly online as <a href="https://twitter.com/_Nec">_Nec</a>, I'm a
+        developer from Budapest, Hungary. Organizer and curator of{' '}
+        <a href="http://jsconfbp.com/">JSConf Budapest</a> and{' '}
         <a href="http://cssconfbp.rocks/">CSSConf Budapest</a>, organizer of{' '}
         <a href="https://www.meetup.com/Frontend-Meetup-Budapest/">
           Frontend Meetup Budapest
