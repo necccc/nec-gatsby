@@ -30,15 +30,9 @@ But I've seen the question appear from several sources: "Okay okay, we got async
 
 Yup, that's it!
 
-For illustration, we could use this small scene from "Frozen".
-
 Just let your async operations `throw` an error, these errors will travel up the async call stack until a point **where you actually care about them**.
 
 You can handle these errors there, log them, and let the user know about the error in some way.
-
-
-
-`gist:9f2594c8a5a2c9247f5de9e3800a619a`
 
 
 
