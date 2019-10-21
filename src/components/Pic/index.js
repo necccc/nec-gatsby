@@ -1,8 +1,11 @@
 import React from 'react'
 import styles from './pic.module.scss'
 
-const Pic = ({ alt, src, title }) => {
+const Pic = props => {
+  const { alt, src, title } = props
   const classNames = [styles.image]
+
+  console.log(props)
 
   classNames.push(styles[`image__pull_${title}`])
 

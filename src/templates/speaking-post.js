@@ -9,11 +9,11 @@ import Pic from '../components/Pic'
 
 const components = {
   img: Pic,
+  image: Pic,
 }
 
 function PostPageTemplate({ data: { mdx } }) {
-  const { relativePath } = mdx.parent
-  const { title, date, tags, dateTime } = mdx.frontmatter
+  const { title } = mdx.frontmatter
 
   return (
     <Layout title={title}>

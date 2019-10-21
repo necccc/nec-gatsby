@@ -12,6 +12,7 @@ tags:
 ---
 
 import Intro from "../../../src/components/Intro";
+import SlideShare from '../../../src/components/SlideShare';
 
 <Intro>
 
@@ -45,109 +46,15 @@ The tricky part here, is that the fields of the redirected Query should be in th
 
 Lets get specific: here's the list of Starships, from the previous post, with a minor addition. Using `next/link` we're going to link the list item to the detail page of the same item:
 
-```jsx
 
+`gist:6810983cd90817fbd611be75c341cec9#StarshipList.jsx`
 
-// our GraphQL Query,
-// get the name and ID of some Starships
-export const getStarships = gql`
-    query getStarships {
-        starshipList {
-            items {
-                name
-                id
-            }
-        }
-    }
-`
-
-// a small component to list the data above
-const List = (props) => (<div>
-    <ul>
-        {
-            // data structure here matches the data structure in the query
-            // using next/link, we're pointing these list items to the starship detail pages
-            props.data.starshipList.items.map(item => (<li key={item.id}>
-                <Link href={{ pathname: '/starship', query: { id: item.id } }}>
-                    <a>{item.name}</a>
-                </Link>
-            </li>))
-        }
-    </ul>
-</div>)
-
-// compose the component and the GraphQL Query together
-// using the `graphql` method from react-apollo.
-export default graphql(getStarships)(List)
-
-```
 
 So far so good, let's create a detail page for our data, listing a bunch of details of a Starship. First, this will be a regular page, with its own GraphQL Query for the data.
 
-```jsx
-import { graphql } from 'react-apollo'
 
-// requesting the data from graphql, by the ID
-export const getStarship = gql`
-    query getStarship($id: ID) {
-        Starship(id: $id) {
-            items {
-                id
-                name
-                model
-                length
-                crew
-                manufacturer
-            }
-        }
-    }
-`
+`gist:6810983cd90817fbd611be75c341cec9#Starship_page.jsx`
 
-class Starship extends React.Component {
-    render() {
-        const { starship } = this.props.data
-
-        return (<div>
-            <h1>{starship.name}</h1>
-
-            <img src="{starship.picture}" />
-
-            <ul>
-                <li>Model: {starship.model}</li>
-                <li>Length: {starship.length}</li>
-                <li>Crew: {starship.crew}</li>
-                <li>Manufacturer: {starship.manufacturer}</li>
-            </ul>
-        </div>)
-    }
-}
-
-// the getInitialProps of nextjs prepares the Starship ID for us
-// grabbing it from the query
-Detail.getInitialProps = async function ({ query }) {
-	return {
-		id: query.id
-	}
-}
-
-// we set up two things here:
-// - get notified if the GraphQL Query is in loading state
-// - put the ID from the props, to the variables, so the Query receives it
-const queryParams = {
-	options: props => {
-		return {
-			notifyOnNetworkStatusChange: true,
-			variables: {
-				id: props.id
-			},
-		}
-	}
-}
-
-// compose the component and the GraphQL Query together
-// using the `graphql` method from react-apollo.
-export default graphql(getStarship, queryParams)(Detail)
-```
 
 First thing that might occur to you is the Query for the detail page has parameters, and much more fields than the List page. Using the parameter `$id`, the GraphQL server can resolve the correct Starship item and send it back as a Query response. The fields are the details we would like to display on the Details page.
 
@@ -167,89 +74,9 @@ Simplest solution for this, is to have a separate Query with the same fields as 
  - leave the full Query as it is
  - combine the Query Components together, so when they resolve in order, they will incrementally render the detail page
 
-```jsx
-import { compose, graphql } from 'react-apollo'
 
-// requesting the same fields as they were in the list
-// specific to the ID we want to see in details
-export const getStarshipQuick = gql`
-    query getStarshipQuick($id: ID) {
-        Starship(id: $id) {
-            items {
-                id
-                name
-            }
-        }
-    }
-`
+`gist:6810983cd90817fbd611be75c341cec9#Starship_page-redirect.jsx`
 
-// requesting the full data from graphql, by the ID
-export const getStarshipFull = gql`
-    query getStarshipFull($id: ID) {
-        Starship(id: $id) {
-            items {
-                id
-                name
-                model
-                length
-                crew
-                manufacturer
-            }
-        }
-    }
-`
-
-class Starship extends React.Component {
-    render() {
-        const { starship } = this.props.data
-
-        return (<div>
-            <h1>{starship.name}</h1>
-
-            <img src="{starship.picture}" />
-
-            <ul>
-                <li>Model: {starship.model}</li>
-                <li>Length: {starship.length}</li>
-                <li>Crew: {starship.crew}</li>
-                <li>Manufacturer: {starship.manufacturer}</li>
-            </ul>
-        </div>)
-    }
-}
-
-// the getInitialProps of nextjs prepares the Starship ID for us
-// grabbing it from the query
-Detail.getInitialProps = async function ({ query }) {
-	return {
-		id: query.id
-	}
-}
-
-// we set up two things here:
-// - get notified if the GraphQL Query is in loading state
-// - put the ID from the props, to the variables, so the Query receives it
-const queryParams = {
-	options: props => {
-		return {
-			notifyOnNetworkStatusChange: true,
-			variables: {
-				id: props.id
-			},
-		}
-	}
-}
-
-// here we compose two GraphQL queries together
-// they will run in order as we compose them
-// first the Quick one - which will be redirected to the cache, and render instantly
-// then the Full one - after resolving that one from the network,
-// it will render the rest of the details
-export default compose(
-	graphql(getStarshipQuick, queryParams),
-	graphql(getStarshipFull, queryParams)
-)(Detail)
-```
 
 ### Optimized Server-side rendering
 
@@ -260,8 +87,5 @@ Even better solution, checking the cache if there is enough data in it, to start
 
 I've tried to explain all this on a few slides, see them here:
 
-<div class="slideshare full">
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/Lrf0vMRGlnPb9u" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-</div>
 
-In a following post I'll
+<SlideShare src="//www.slideshare.net/slideshow/embed_code/key/Lrf0vMRGlnPb9u" />
