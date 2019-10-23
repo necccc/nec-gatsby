@@ -6,7 +6,7 @@ tags:
 - npm
 - packages
 ---
-
+import PostImage from "../../../src/components/PostImage";
 import Blockquote from "../../../src/components/Blockquote";
 import Intro from "../../../src/components/Intro";
 
@@ -19,10 +19,13 @@ This is a comprehensive guide on npm authoring, not just for beginners. I'll vis
 
 </Intro>
 
-
 ## Define what to publish
 
-![node_modules folder vs black hole joke, a classic!](./node-modules.jpg "right")
+<PostImage
+  image="node-modules.jpg"
+  align="right"
+  alt="node_modules folder vs black hole joke, a classic!"
+/>
 
 Know more jokes like this? We can work on this issue, if we define what should be in the package, that goes up to npm and what stays in the git repository. With a simple, rule of thumb:
 - code, that is actually needed for the module, should go to npm
@@ -35,6 +38,8 @@ Things like these, should not be packaged:
 - Usage demos
 
 These can stay in the git repository. Anyone who needs a closer look on your module, how to use it, needs examples, can find it there. Contributors will also use the git repo as the source of code, where development is done, and tests are ran - they don't need those in the distributed package.
+
+
 
 ### Use a whitelist
 

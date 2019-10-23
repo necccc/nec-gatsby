@@ -82,7 +82,9 @@ module.exports = {
         ],
       },
     },
+
     'gatsby-transformer-sharp',
+
     'gatsby-plugin-sharp',
 
     {
@@ -96,6 +98,7 @@ module.exports = {
         cookieDomain: 'nec.is',
       },
     },
+
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -154,7 +157,9 @@ module.exports = {
         ],
       },
     },
+
     'gatsby-plugin-force-trailing-slashes',
+
     'gatsby-plugin-react-helmet',
 
     'gatsby-plugin-catch-links',
@@ -171,7 +176,9 @@ module.exports = {
         icon: 'src/images/logo.png', // This path is relative to the root of the site.
       },
     },
+
     'gatsby-plugin-offline',
+
     'gatsby-plugin-sass',
 
     {
