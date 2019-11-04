@@ -37,31 +37,9 @@ Such use cases, for example:
 
 How these look like in code:
 
-```js
 
-    // pass in `this` to a function
-    const elements = document.querySelectorAll("div")
+`gist:ca282f807a71930b10ea54dc2e45705f#bind-operator.js`
 
-    const filterCollectionByClass = function (classname) {
-        return Array.from(this).filter(item => item.className.indexOf(classname) >= 0)
-    }
-
-    // current solution
-    filterCollectionByClass.call(elements, 'some-classname')
-    // run "filterCollectionByClass" with the "elements" collection as "this"
-
-    // using the Bind Operator
-    elements::filterCollectionByClass('some-classname')
-
-
-    // use `console.log` as a function, bound to `console`
-    // current solution
-    [ 1,2,3,4,5 ].forEach(console.log.bind(console))
-
-    // using the Bind Operator
-    [ 1,2,3,4,5 ].forEach(::console.log)
-
-```
 
 ### Code readability
 
@@ -71,17 +49,9 @@ Reading the usage of the `filterCollectionByClass` function on the `elements` co
 
 Let's have a quick explainer on what happens above:
 
-```js
 
-    ::instance.method
-    // returns a "method" function, bound by context to the "instance"
-    // so inside "method" the "this" will point to "instance"
+`gist:ca282f807a71930b10ea54dc2e45705f#bind-operator-explainer.js`
 
-    variable::method(arg1, arg2, ...)
-    // runs the "method" function with "variable" as context, and optional arguments
-    // so inside "method" the "this" will point to "variable"
-
-```
 
 The important difference here is that the first notation creates a function that can be re-used, and the second one actually runs the function - just like the difference between `bind` and `call/apply`.
 
@@ -107,17 +77,9 @@ I was like: HAH, gather around folks, and let me tell you the story of **top-lev
 
 What they did to resolve their problem, is usually called an **IIAFE**, or _immediately invoked async function expression_, the big sister of IIF expressions.
 
-```js
 
-// IIF
-(() => {  /* code  */  })();
+`gist:ca282f807a71930b10ea54dc2e45705f#IIAFE.js`
 
-// IIAF
-(async function () {
-    /* await code */
-})()
-
-```
 
 Currently, this additional boilerplate code is the solution to quickly reach the `await` keyword in your modules at a top level, and stop using callbacks, or Promises (or `.then()` and `.catch()` more precisely, since async/await is practically using Promises).
 
@@ -129,19 +91,9 @@ The question is simple, but the answer... not really. The problem originates fro
 
 This is also true when we're using **dynamic imports** in our code, to reach modules, or computed module names in an async way - and the main concerns with top-level await comes from these use cases.
 
-```js
 
-// static import
-import foo from 'foo'
+`gist:ca282f807a71930b10ea54dc2e45705f#tla-dynamic-import.js`
 
-// dynamic import, returns a promise, can be awaited
-const bar = await import('bar')
-
-// computed dynamic import
-const lang = 'en_us'
-const text = await import(`languages/${lang}/text.js`)
-
-```
 
 Let's go over on most of the concerns with this kind of code:
 
@@ -159,24 +111,9 @@ Good news: if you use declarative imports (meaning you write static module paths
 
 More problematic use cases are the calculated module imports, and these might be really useful in real-life scenarios.
 
-```js
 
-// reaching a module, based on the visitor's state
-const text = await import(`languages/${userLang}/module.js`)
+`gist:ca282f807a71930b10ea54dc2e45705f#calculate-imports.js`
 
-
-// code splitting
-import { criticalPart } from 'critical-components'; // critical stuff loads sync
-await criticalPart(); // do render
-const lazy = await import('lazy-components'); // load the rest async
-
-
-// debugging, or import decision based on server environment
-if (process.env.NODE_ENV !== 'production') {
-    await import('framework-debugger')
-}
-
-```
 
 This is the characteristic of application code, not library code, so accidentally reaching a point like this by using third party modules is very unlikely. Are you afraid that awaiting modules might block your code? Let's quote [Bradley Meck](https://github.com/bmeck) here:
 
@@ -224,36 +161,25 @@ Like if you defer all your imports in with `Promise.all`, and the importing scri
 
 Raise your hand if you've ever done something like this in your life:
 
-```js
 
-    const homeworld = person.homeworld.name || 'unknown'
-    // Uncaught TypeError: Cannot read property 'name' of undefined
+`gist:ca282f807a71930b10ea54dc2e45705f#optional-chain-problem.js`
 
-    const homeworld = person.homeworld && person.homeworld.name || 'unknown'
-
-```
 
 Most of us have been there, receiving an object from some API or XHR request, and we would like to access a property, deeply nested somewhere inside - but we may not be sure if the data is _actually there_.
 
 To solve issues like this, the [Optional Chaining](https://github.com/TC39/proposal-optional-chaining) was proposed. The previous code would look like this, using optional chaining:
 
-```js
 
-const homeworld = person.homeworld?.name || 'unknown'
+`gist:ca282f807a71930b10ea54dc2e45705f#optional-chaining.js`
 
-```
 
 If the `homeworld` property does not exist on the `person` object, the chain will resolve to `undefined`, instead of throwing an error - so we can add a default value easily and our code seems a bit more readable too!
 
 This works with methods, and dynamic properties as well! A quick overview of the syntax proposal:
 
-```js
 
-    obj?.prop       // optional static property access
-    obj?.[expr]     // optional dynamic property access
-    func?.(...args) // optional function or method call
+`gist:ca282f807a71930b10ea54dc2e45705f#optional-chaining-explainer.js`
 
-```
 
 If the parent object or method is missing all these evaluate to `undefined`, a predictable value, it's easy to build upon them.
 
