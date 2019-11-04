@@ -17,10 +17,33 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'writing',
-        path: `${__dirname}/content/writing`
+        path: `${__dirname}/content/writing`,
+        ignore: [
+          `**/*.jpg`, 
+          `**/*.svg`,
+          `**/*.gif`,
+          `**/*.jpeg`,
+          `**/*.webp`,
+          `**/*.png`,     
+          `**/*.js`, 
+          `**/*.mp4`, 
+          `**/*.m4v`
+        ],
       }
     },
-
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'postimages',
+        path: `${__dirname}/content/writing`,
+        ignore: [
+          `**/*.mdx`, 
+          `**/*.js`, 
+          `**/*.mp4`, 
+          `**/*.m4v`
+        ],
+      }
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

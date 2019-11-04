@@ -11,6 +11,7 @@ tags:
 - performance
 ---
 
+import PostImage from "../../../src/components/PostImage";
 import Intro from "../../../src/components/Intro";
 
 <Intro>
@@ -29,8 +30,11 @@ First let's have a quick intro on the building blocks: Next.js, GraphQL and the 
 ### Next.js
 
 
-![The Next.js logo](./nextjs.svg "right")
-
+<PostImage
+  image="nextjs.svg"
+  align="right"
+  alt="The Next.js logo"
+/>
 
 [Next.js](https://nextjs.org/) is a framework for server-rendered React apps - it can generate static sites too, but it works great with dynamic sites as well. A powerful Webpack setup, Server-side rendered React and routing packed together to a small framework. If you want to elaborate things and get more dynamic, you can plug it on a web framework like Express, Hapi or Koa, and use their routing, middleware, everything.
 

@@ -32,7 +32,6 @@ But I've seen the question appear from several sources: "Okay okay, we got async
   alt="Small scene from the movie 'Frozen', with Elza handling async errors properly"
 />
 
-
 Yup, that's it!
 
 Just let your async operations `throw` an error, these errors will travel up the async call stack until a point **where you actually care about them**.
