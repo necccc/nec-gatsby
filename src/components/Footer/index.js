@@ -33,7 +33,7 @@ const Footer = ({ title = '' }) => (
               </a>
             </li>
             <li>
-              <a href="/atom.xml">RSS feed</a> of my posts
+              <a href="/rss.xml">RSS feed</a> of my posts
             </li>
             <li>
               Check out my <a href="/working">resume</a>
