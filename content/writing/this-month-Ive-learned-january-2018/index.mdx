@@ -9,7 +9,7 @@ tags:
 - webcrypto
 - fetch
 ---
-
+import PostImage from "../../../src/components/PostImage";
 import Intro from "../../../src/components/Intro";
 
 <Intro>
@@ -54,7 +54,11 @@ results in a dark and mysterious error message!
 
 ### <a name="tainted-canvas"></a> Tainted canvas
 
-![full](./tainted-canvas.jpg "The Tainted Canvas error message in the console")
+<PostImage
+  image="tainted-canvas.jpg"
+  align="rifullght"
+  alt="The Tainted Canvas error message in the console"
+/>
 
 This means, that the image can be used and displayed in canvas (just like in the IMG tag) but access to its data is locked, for security reasons.
 

@@ -47,6 +47,24 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        name: 'postvideos',
+        path: `${__dirname}/content/writing`,
+        ignore: [
+          `**/*.mdx`, 
+          `**/*.js`, 
+          `**/*.jpg`, 
+          `**/*.svg`,
+          `**/*.gif`,
+          `**/*.jpeg`,
+          `**/*.webp`,
+          `**/*.png`,     
+          `**/*.js`,
+        ],
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'speaking',
         path: `${__dirname}/content/speaking`
       }

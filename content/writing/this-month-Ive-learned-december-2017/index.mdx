@@ -9,7 +9,8 @@ tags:
 - css
 - ligature
 ---
-
+import PostImage from "../../../src/components/PostImage";
+import PostVideo from "../../../src/components/PostVideo";
 import Intro from "../../../src/components/Intro";
 import Blockquote from "../../../src/components/Blockquote";
 
@@ -22,9 +23,11 @@ Not to mention that I started this blog, and needed t refresh my basic trigonome
 
 ## Helm for kubernetes
 
-
-![The Helm logo](./helm-logo.svg "left")
-
+<PostImage
+  image="helm-logo.svg"
+  align="left"
+  alt="The Helm logo, the steering wheel of a ship"
+/>
 
 We use kubernetes clusters to deploy and run services, but until now it was unknown for me, how exactly these services are set up.
 Imagine the kubernetes building blocks:
@@ -83,8 +86,11 @@ These are really the most essential commands, there are many other commands, you
 
 While working on a feature, that relies heavily on the contenteditable property of the DOM, this happened:
 
-<video src="./ligature.m4v" autoplay loop muted playsinline title="Short video of how the caret interacts with a ligature in the browser">
-</video>
+
+<PostVideo
+  video="ligature.m4v"
+  alt="Short video of how the caret interacts with a ligature in the browser"
+/>
 
 Since I know the work of [@aemkei](https://twitter.com/aemkei), and the
 [dark magic of zero-width Unicode characters](https://www.google.hu/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0ahUKEwjnu57CudPYAhWIJ1AKHZ78AtkQtwIILDAB&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DT3xMyZH93i8&usg=AOvVaw34ISWo92p4Vb145hRQ3UN9), I prepared for the worst. Tried to hunt down any, accidentally created ghost character, but there were none. It was really two characters, handled as somewhat one, but the caret did not move while stepping over them.
@@ -110,7 +116,11 @@ But it can be turned off, using the powers of CSS!
 `gist:2b1798874b3538e6e74b04e384bb8426#no_ligature.css`
 
 
-![examples for font-variant-ligatures, font-variant-numeric and font-variant-alternates](./css-font-examples.png "right")
+<PostImage
+  image="css-font-examples.png"
+  align="right"
+  alt="examples for font-variant-ligatures, font-variant-numeric and font-variant-alternates"
+/>
 
 The best place to learn about these is the [W3 spec itself](https://www.w3.org/TR/css-fonts-3/#font-variant-ligatures-prop) and it turned out,
 it's a long slippery way down the rabbit hole.
@@ -156,13 +166,21 @@ elements looked boring. So why not add some animation?
 </video>
 
 
-![The right-angled triangles, on the top and the bottom of the skewed rectangle](./skew-triangles.png "right")
+<PostImage
+  image="skew-triangles.png"
+  align="right"
+  alt="The right-angled triangles, on the top and the bottom of the skewed rectangle"
+/>
 
 To animate these leaning layers, I have to update the css `skew` property, by a relatively small degree. If I look at this shape of
 a skewed background rectangle, the upper / or lower part is a simple [right-angled triangle](https://en.wikipedia.org/wiki/Right_triangle).
 The value I need, is the angle between it's adjacent and hypotenuse, that has the degree value to skew the background with.
 
-![Sine, cosine and tangent basics.](./sin-cos-tan.svg "right")
+<PostImage
+  image="sin-cos-tan.svg "
+  align="right"
+  alt="Sine, cosine and tangent basics."
+/>
 
 Luckily, the right-angled triangle has some basic rules in trigonometry.
 
@@ -179,9 +197,7 @@ Setting a CSS property from JS can be painful for rendering performance. Instead
 where the value of a CSS property is bound to a CSS variable, just update the value of the variable from JS, and let the browser sort out the rest.
 
 
-
 `gist:2b1798874b3538e6e74b04e384bb8426#set_css_prop.html`
-
 
 
 Combining this technique with [FLIP](https://aerotwist.com/blog/flip-your-animations/), enables you to create not just fancy decorative animations,

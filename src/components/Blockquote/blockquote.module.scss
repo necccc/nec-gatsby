@@ -10,6 +10,15 @@
 	padding-left: 1rem;
 	padding-right: 12rem;
 
+	&-full {
+		&:before {
+			display: block;
+			content: '';
+			height: 1px;
+			clear: both;
+		}
+	}
+
 	.body {
 		font-family: $heading-font;
 		font-weight: 300;
