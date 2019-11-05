@@ -10,12 +10,20 @@ tags:
 - neopixels
 - diy
 ---
+import PostVideo from "../../../src/components/PostVideo";
+import PostImage from "../../../src/components/PostImage";
+import Youtube from "../../../src/components/Youtube"
+import Intro from "../../../src/components/Intro";
 
-<div class="youtube full"><iframe src="https://www.youtube.com/embed/VG4yphlYwe4?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;playsinline=1&amp;modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen class="full"></iframe></div>
+<Intro>
 
 This will be the story and a guide of how you can create a wall clock like on this video. It’s a digital clock, I named it _QClock_, the outer light is the “long arm” for the minutes, the inner light is the “short arm” for the hours. The time, colors, method of showing the time, animations - all can be controlled on a small website, hosted by the clock itself.
 
 The plan is to publish in two parts, the software will come soon, but first: the hardware.
+
+</Intro>
+
+<Youtube src="https://www.youtube.com/embed/VG4yphlYwe4" />
 
 ## Backstory
 
@@ -38,8 +46,11 @@ Some ideas emerged, like magnetic arms, huge e-ink numbers (turns out there is s
 - NeoPixel RGB LEDs
 - Tessel Microcontroller
 
-
-{% image_tag "pull-right" "neopixels.jpg" "Neopixel LED strip" %}
+<PostImage
+  image="neopixels.jpg"
+  align="right"
+  alt="Neopixel RGB LED strip"
+/>
 
 ### NeoPixel LED strips
 
@@ -56,7 +67,12 @@ To control the NeoPixels, you’ll need a microcontroller. I picked the [Tessel]
 
 As it turned out, to drive the NeoPixels from the Tessel you either need custom firmware or treat the LED strip as a servo engine (sort of) and figure out the rest yourself. This wasn’t an option for me, but luckily [Tim Pietrusky](https://twitter.com/timpietrusky) from [Live:JS](http://livejs.network/) showed me a small piece of hardware, that was designed specifically to drive the NeoPixels: the [FadeCandy](https://www.adafruit.com/product/1689)
 
-{% image_tag "pull-right" "fadecandy.jpg" "The FadeCandy Neopixel driver" %}
+
+<PostImage
+  image="fadecandy.jpg"
+  align="right"
+  alt="The FadeCandy Neopixel driver"
+/>
 
 ### FadeCandy
 
@@ -74,12 +90,20 @@ The material of the bezel is also significant, he less translucent, the better. 
 
 ## Assembly
 
-<!-- div class="video full"><video src="{% asset_path "qclock-assembly-720p.mp4" %}" autoplay loop muted playsinline title="Short video of the assembled clock frame">
-</video></div -->
+<PostVideo
+  video="qclock-assembly-720p.mp4"
+  align="full"
+  alt="Short video of the assembled clock frame"
+/>
 
 First, I’ve wrapped the strip around and inside the wooden bezel so I could see how many LEDs are around the outer and the inner side of the frame - this will be the base of several further calculations.
 
-{% image_tag "pull-right" "qclock-wiring.jpg" "Connecting the NeoPixel LED strips to the FadeCandy controller" %}
+
+<PostImage
+  image="qclock-wiring.jpg"
+  align="right"
+  alt="Connecting the NeoPixel LED strips to the FadeCandy controller"
+/>
 
 Turned out that there are 60 LEDs outside, and 58 inside. FadeCandy can control 64 LEDs per channel, so it’s not possible to handle the whole clock as one single strip. The simplest solution is to treat the outer and the inner circle as separate channels.
 
@@ -91,7 +115,11 @@ For larger setups, the LEDs use a lot of power, so usually, the 5V port is comin
 
 From this stage, connecting the FadeCandy to the Tessel is pretty easy, just connect a USB to Micro-USB cable to one of the Tessel’s USB ports. To make things a bit more sturdy, I packaged everything in an old ChromeCast box. This way I can put the clock controls to safety, minimizing the possibility of no accidental disconnection.
 
-{% image_tag "full" "qclock-box.jpg" "QClock light test at night, lights behind the bezel, and all electronics in a small ChromeCast box. Looks really messy, but as a first, it's perfect!" %}
+<PostImage
+  image="qclock-box.jpg"
+  align="full"
+  alt="QClock light test at night, lights behind the bezel, and all electronics in a small ChromeCast box. Looks really messy, but as a first, it's perfect!"
+/>
 
 Stay tuned for the exciting second part, where I share some details of the software!
 

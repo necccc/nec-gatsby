@@ -2,7 +2,7 @@ import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import css from './video.module.scss'
 
-export default ({ video, className = '', align = 'left', alt = '' }) => (
+export default ({ video, className = '', align = 'full', alt = '' }) => (
   <StaticQuery
     query={graphql`
       query postVideoQuery {
@@ -21,24 +21,25 @@ export default ({ video, className = '', align = 'left', alt = '' }) => (
     `}
     render={data => {
       const classNames = [css.video]
-      classNames.push(css[`video__pull_${align}`])
+      classNames.push(css[`video__${align}`])
 
       return data.source.edges
         .filter(({ node }) => {
           const { relativePath } = node
           return relativePath.includes(video)
         })
-        .map(({ node }, i) => (<span className={classNames.join(' ')} key={`${video}-${i}`}>
+        .map(({ node }, i) => (<div className={classNames.join(' ')} key={`${video}-${i}`}>
           <video 
             src={node.publicURL} 
-            autoplay={true} 
-            loop={true} 
-            muted={true} 
-            playsinline={true} 
+            controls={ false }
+            autoPlay
+            loop={ true } 
+            muted={ true } 
+            playsInline={ true } 
             title={ alt }>
           </video>
           <small className={css.description}>{alt}</small>
-        </span>))
+        </div>))
     }}
   />
 )

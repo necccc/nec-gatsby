@@ -17,8 +17,8 @@
         padding-bottom: 1rem;
     }
 
-    &__pull_left,
-    &__pull_right {
+    &__left,
+    &__right {
         width: 330px;
         text-align: center;
 
@@ -32,13 +32,13 @@
         }
     }
 
-    &__pull_left {
+    &__left {
         float: left;
         clear: left;
         margin-right: 2rem;
     }
 
-    &__pull_right {
+    &__right {
         float: right;
         clear: right;
         margin-left: 2rem;
