@@ -63,13 +63,13 @@ class Header extends React.Component {
 
             <ul className={styles.header_nav_links}>
               <li className={styles.header_nav_link}>
-                <Link to="/writing">writing</Link>
+                <Link to="/">writing</Link>
               </li>
               <li className={styles.header_nav_link}>
                 <Link to="/speaking">speaking</Link>
               </li>
               <li className={styles.header_nav_link}>
-                <a href="">twitter</a>
+                <a href="https://twitter.com/_Nec">twitter</a>
               </li>
             </ul>
           </nav>

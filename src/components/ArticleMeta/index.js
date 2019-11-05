@@ -37,8 +37,7 @@ const ArticleMeta = ({ relativePath = '', date, tags, dateTime }) => (
       <section className={styles.meta}>
         <div className={styles.meta_inner}>
           <p>
-            Posted on <time dateTime={dateTime}>{date}</time>, tagged as{' '}
-            <Tags tags={tags} />.
+            Posted on <time dateTime={dateTime}>{date}</time>.
           </p>
           <p>
             If you wish to comment, correct someting silly I've wrote or ask a
