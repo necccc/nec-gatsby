@@ -5,7 +5,7 @@
     max-width: 100%;
     width: 100%;
     padding: 4rem 0 2rem;
-    margin: -4rem 0 0;
+    margin: -2rem 0 0;
     transform: translateY(6rem);
 
     color: lighten($color-black, 50%);
@@ -25,7 +25,6 @@
         height: 120%;
         transform: skewY(-3deg);
         transform-origin: left top;
-
     }
 
     &_inner {

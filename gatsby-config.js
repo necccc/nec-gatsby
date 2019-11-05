@@ -12,7 +12,6 @@ module.exports = {
     siteUrl: 'https://nec.is'
   },
   plugins: [
-
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -69,7 +68,6 @@ module.exports = {
         path: `${__dirname}/content/speaking`
       }
     },
-
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -77,7 +75,6 @@ module.exports = {
         path: `${__dirname}/src/pages`,
       },
     },
-
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -110,22 +107,11 @@ module.exports = {
               includeDefaultCss: true
             },
           },
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 330,
-              showCaptions: true
-            },
-          },
         ],
       },
     },
 
     'gatsby-transformer-sharp',
-
     'gatsby-plugin-sharp',
 
     {
@@ -157,14 +143,16 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.edges.map(edge => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  data: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug
+              return allMdx.edges
+                .filter(edge => (edge.node.parent.sourceInstanceName === 'writing'))
+                .map(edge => {
+                  return Object.assign({}, edge.node.frontmatter, {
+                    description: edge.frontmatter.description,
+                    data: edge.node.frontmatter.date,
+                    url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                    guid: site.siteMetadata.siteUrl + edge.node.fields.slug
+                  })
                 })
-              })
             },
 
             /* if you want to filter for only published posts, you can do
@@ -181,11 +169,15 @@ module.exports = {
               ) {
                 edges {
                   node {
-                    body
-                    fields { slug }
                     frontmatter {
                       title
                       date
+                      description
+                    }
+                    parent {
+                      ... on File {
+                        sourceInstanceName
+                      }
                     }
                   }
                 }
@@ -200,9 +192,7 @@ module.exports = {
     },
 
     'gatsby-plugin-force-trailing-slashes',
-
     'gatsby-plugin-react-helmet',
-
     'gatsby-plugin-catch-links',
 
     {
@@ -219,7 +209,6 @@ module.exports = {
     },
 
     'gatsby-plugin-offline',
-
     'gatsby-plugin-sass',
 
     {
