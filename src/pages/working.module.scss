@@ -3,6 +3,8 @@
 @import '../components/font-face.scss';
 @import '../components/mixins.scss';
 
+
+/* 
 .layout-resume {
 	header {
 		height: 28rem;
@@ -54,13 +56,14 @@
 			}
 		}
 	}
-}
+} */
 
 .resume {
-
 	&-container {
-		padding-top: 4rem;
-		font-size: .9rem;
+		@include article();
+
+		padding-top: 24rem;
+		font-size: 1rem;
 
 		display: grid;
 		grid-gap: 2rem;
@@ -93,12 +96,25 @@
 
 		&-title {
 			font-size: 1.6rem;
+			font-weight: normal;
 			align-self: start;
 			margin: 0;
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				display: block;
+				width: 2px;
+				height: 100%;
+				left: -2rem;
+				background-color: $color-black;
+				box-sizing: border-box;
+			}
 		}
 
 		h3 {
-			font-size: 1.214rem;
+			font-size: 1.314rem;
 		}
 
 		p, h3, h4 {
@@ -110,11 +126,14 @@
 		}
 
 		h4 {
+			font-size: 1rem;
 			color: lighten($color-black, 50%);
+			font-weight: normal;
+			margin-bottom: 2rem;
+			font-family: $body-font;
 
 			em {
 				color: lighten($color-black, 75%);
-				font-weight: normal;
 			}
 		}
 
@@ -130,7 +149,18 @@
 			}
 
 			li {
-				margin-bottom: 0;
+				position: relative;
+				counter-increment: li;
+				margin-left: 1.45rem;
+				margin-bottom: 1rem;
+		
+				&::before {
+					content: "■";
+					position: absolute;
+					transform: translateX(-1.45rem);
+					top: 0;
+					color: $color-blue;
+				}
 			}
 		}
 

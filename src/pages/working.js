@@ -1,17 +1,21 @@
 import React from 'react'
-import { graphql } from 'gatsby'
-import { Link } from 'gatsby'
 
 import Layout from '../components/Layout'
 import css from './working.module.scss'
 
-export default props => (
+export default (props) => {
+
+    console.log(css);
+    
+
+    return (
 <Layout title="Szabolcs Szabolcsi-Toth">
-    <article className={ css["resume-container"] }>
+
+    <article className={ css.resumeContainer }>
     
-        <h2 className={ css["resume-section-title"] }>Technologies and Skills</h2>
+        <h2 className={ css.resumeSectionTitle }>Technologies and Skills</h2>
     
-        <div className={ css["resume-section"] }>
+        <div className={ css.resumeSection }>
             <ul>
                 <li><strong>Languages:</strong> English, Hungarian</li>
                 <li><strong>Design:</strong> web, responsive web, Photoshop, Illustrator</li>
@@ -20,20 +24,26 @@ export default props => (
             </ul>
         </div>
     
-        <h2 className={ css["resume-section-title"] }>Work Experience</h2>
+        <h2 className={ css.resumeSectionTitle  }>Work Experience</h2>
     
-        <div className={ css["resume-section"] }>
+        <div className={ css.resumeSection }>
     
-            <h3>CEO</h3>
+            <h3>CEO & Organizer</h3>
             <h4>JSSC Event organizing, private company • <em>2017 - present</em></h4>
             <ul>
                 <li>Company management</li>
                 <li>Financial management</li>
                 <li>Event organizing</li>
             </ul>
-    
+
+            <h3>Senior Engineer</h3>
+            <h4>IBM Cloud • <em>2019 - present</em></h4>
+            <ul>
+                <li>Developing user facing Cloud UI's and microservices in React and Node.js</li>
+            </ul>
+
             <h3>Senior Frontend Engineer</h3>
-            <h4>IBM Cloud Video (formerly Ustream, acquired by IBM) • <em>2016 - present</em></h4>
+            <h4>IBM Cloud Video (formerly Ustream, acquired by IBM) • <em>2016 - 2019</em></h4>
             <ul>
                 <li>Finding solutions to a backend-for-frontend system using React, to feature i18n, SSR, code splitting and Redux state management</li>
                 <li>Transforming a huge legacy JS codebase to module and webpack</li>
@@ -68,9 +78,9 @@ export default props => (
     
         </div>
     
-        <h2 className={ css["resume-section-title"] }>Community work</h2>
+        <h2 className={ css.resumeSectionTitle }>Community work</h2>
     
-        <div className={ css["resume-section"] }>
+        <div className={ css.resumeSection }>
     
             <h3>Frontend Meetup Budapest 2018 - present</h3>
             <h4>Co-Organizer</h4>
@@ -79,32 +89,32 @@ export default props => (
                 <li>Occasional MCing at the events</li>
             </ul>
     
-            <h3>CSSConf Budapest 2016 - 2017</h3>
+            <h3>CSSConf Budapest 2016 - 2019</h3>
             <h4>Organizer</h4>
             <ul>
                 <li>CSSConf Budapest is the part of the international CSSConf family</li>
                 <li>single day single track event</li>
-                <li>18 speakers and ~500 attendees since 2016</li>
-                <li>Organized and helped at 2 successful events so far</li>
+                <li>27 speakers and ~800 attendees since 2016</li>
+                <li>Organized and helped at 3 successful events so far</li>
                 <li>My participation was in organizing venue, catering, hotel and flight arrangements and sponsor negotiations</li>
             </ul>
     
-            <h3>JSConf Budapest 2015 - 2017</h3>
+            <h3>JSConf Budapest 2015 - 2019</h3>
             <h4>Curator, organizer</h4>
             <ul>
                 <li>JSConf Budapest is the part of the international JSConf family</li>
                 <li>2 day, single track event</li>
-                <li>55 speakers and ~1400 attendees since 2015</li>
+                <li>75 speakers and ~2000 attendees since 2015</li>
                 <li>Focused on technology, culture and diversity</li>
-                <li>Curated and organized 3 successful events so far</li>
+                <li>Curated and organized 4 successful events so far</li>
                 <li>My participation was in curating the lineup, organizing venue, catering, hotel and flight arrangements and sponsor negotiations</li>
             </ul>
     
         </div>
     
-        <h2 className={ css["resume-section-title"] }>Speaking Engagements</h2>
+        <h2 className={ css.resumeSectionTitle  }>Speaking Engagements</h2>
     
-        <div className={ css["resume-section"] }>
+        <div className={ css.resumeSection }>
         
             <h3>NodeConf EU 2018</h3>
             <h4>Healthy & fit wombats for the greater good</h4>
@@ -138,9 +148,9 @@ export default props => (
     
         </div>
     
-        <h2 className={ css["resume-section-title"] }>Education</h2>
+        <h2 className={ css.resumeSectionTitle }>Education</h2>
     
-        <div className={ css["resume-section"] }>
+        <div className={ css.resumeSection }>
     
             <h3>Bachelor of IT Engineering</h3>
             <h4>University of Pécs - PMMFK</h4>
@@ -152,4 +162,4 @@ export default props => (
     
     
     </article>
-</Layout>)
+</Layout>)}
