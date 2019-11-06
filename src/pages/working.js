@@ -82,23 +82,6 @@ export default (props) => {
     
         <div className={ css.resumeSection }>
     
-            <h3>Frontend Meetup Budapest 2018 - present</h3>
-            <h4>Co-Organizer</h4>
-            <ul>
-                <li>Helping around the meetup organization, speakers, venues</li>
-                <li>Occasional MCing at the events</li>
-            </ul>
-    
-            <h3>CSSConf Budapest 2016 - 2019</h3>
-            <h4>Organizer</h4>
-            <ul>
-                <li>CSSConf Budapest is the part of the international CSSConf family</li>
-                <li>single day single track event</li>
-                <li>27 speakers and ~800 attendees since 2016</li>
-                <li>Organized and helped at 3 successful events so far</li>
-                <li>My participation was in organizing venue, catering, hotel and flight arrangements and sponsor negotiations</li>
-            </ul>
-    
             <h3>JSConf Budapest 2015 - 2019</h3>
             <h4>Curator, organizer</h4>
             <ul>
@@ -109,7 +92,30 @@ export default (props) => {
                 <li>Curated and organized 4 successful events so far</li>
                 <li>My participation was in curating the lineup, organizing venue, catering, hotel and flight arrangements and sponsor negotiations</li>
             </ul>
+
+            <h3>CSSConf Budapest 2016 - 2019</h3>
+            <h4>Organizer</h4>
+            <ul>
+                <li>CSSConf Budapest is the part of the international CSSConf family</li>
+                <li>single day single track event</li>
+                <li>27 speakers and ~800 attendees since 2016</li>
+                <li>Organized and helped at 3 successful events so far</li>
+                <li>My participation was in organizing venue, catering, hotel and flight arrangements and sponsor negotiations</li>
+            </ul>
     
+            <h3>Frontend Meetup Budapest 2018 - present</h3>
+            <h4>Co-Organizer</h4>
+            <ul>
+                <li>Helping around the meetup organization, speakers, venues</li>
+                <li>Occasional MCing at the events</li>
+            </ul>
+
+            <h3>Global Diversity CFP Day Workshop 2018 - present</h3>
+            <h4>Mentor, facilitator</h4>
+            <ul>
+                <li>Helping around the organization, mentors, venue</li>
+                <li>Mentoring at the workshop itself</li>
+            </ul>
         </div>
     
         <h2 className={ css.resumeSectionTitle  }>Speaking Engagements</h2>
