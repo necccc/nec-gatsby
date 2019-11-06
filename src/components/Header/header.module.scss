@@ -172,7 +172,6 @@
 				color: $color-light-1;
 
 				&:hover {
-
 					border-bottom: none;
 					text-decoration: underline;
 				}
@@ -185,6 +184,8 @@
 			bottom: calc(calc(var(--headerHeight) * -1) + calc(11.3rem - calc(5rem * var(--headerScrollRatio))));
 
 			svg {
+        left: 0rem;
+        top: 0rem;
 				height: 2.5em;
 				width: 2.5rem;
 
@@ -193,7 +194,42 @@
 				}
 			}
 		}
-	}
+  }
+
+  &-resume {
+    height: 32rem;
+
+    #{$header}_nav {
+      display: none;
+    }
+
+    svg {
+      left: 1rem;
+      top: 1rem;
+      width: 10rem;
+      height: 10rem;
+    }
+
+    #{$header}_title {
+      margin-top: 9rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
+      font-size: 3.2rem;
+    }
+
+    #{$header}_top::after {
+      display: block;
+      position: absolute;
+      content: attr(smalltitle);
+      left: 4rem;
+      bottom: calc(calc(var(--headerHeight) * -1) + calc(5rem - calc(5rem * var(--headerScrollRatio))));
+
+      color: #fbfbfb;
+      height: 4rem;
+      line-height: 4rem;
+      font-size: 1.4rem;
+    }
+  }
 }
 
 .index header {

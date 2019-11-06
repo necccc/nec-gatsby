@@ -1,20 +1,20 @@
 import React from 'react'
-
+import classnames from 'classnames'
 import Layout from '../components/Layout'
 import css from './working.module.scss'
 
 export default (props) => {
 
     console.log(css);
-    
+
 
     return (
-<Layout title="Szabolcs Szabolcsi-Toth">
+<Layout title="Szabolcs Szabolcsi-Toth" resume>
 
     <article className={ css.resumeContainer }>
-    
+
         <h2 className={ css.resumeSectionTitle }>Technologies and Skills</h2>
-    
+
         <div className={ css.resumeSection }>
             <ul>
                 <li><strong>Languages:</strong> English, Hungarian</li>
@@ -23,11 +23,11 @@ export default (props) => {
                 <li><strong>Deployment & maintenance:</strong> npm, linux systems, git/github/gitlab, Docker, Chef, Kubernetes, Hashicorp Vault, TravisCI, TeamCity</li>
             </ul>
         </div>
-    
+
         <h2 className={ css.resumeSectionTitle  }>Work Experience</h2>
-    
+
         <div className={ css.resumeSection }>
-    
+
             <h3>CEO & Organizer</h3>
             <h4>JSSC Event organizing, private company • <em>2017 - present</em></h4>
             <ul>
@@ -51,7 +51,7 @@ export default (props) => {
                 <li>Developed and participated in the design process of a Caption Editor for both Cloud Video and Watson Media</li>
                 <li>Planned and developed the Node.js based service for our Q&A allpication</li>
             </ul>
-    
+
             <h3>Senior Frontend Engineer</h3>
             <h4>Ustream Inc, startup • <em>2009 - 2016</em></h4>
             <ul>
@@ -62,26 +62,26 @@ export default (props) => {
                 <li>Finished several iterations on the whole site design together with the team</li>
                 <li>Active participation in recruitment, interviewing</li>
             </ul>
-    
+
             <h3>Senior Frontend Developer</h3>
             <h4>Carnation (later it was acquired by POSSIBLE), digital agency • <em>2007 - 2009</em></h4>
             <ul>
                 <li>Sites for media, telecommunication, banks</li>
                 <li>Mentoring peers</li>
             </ul>
-    
+
             <h3>Frontend Developer</h3>
             <h4>Carnation (later it was acquired by POSSIBLE), digital agency • <em>2004 - 2007</em></h4>
             <ul>
                 <li>Agency work: media sites, microsites</li>
             </ul>
-    
+
         </div>
-    
+
         <h2 className={ css.resumeSectionTitle }>Community work</h2>
-    
+
         <div className={ css.resumeSection }>
-    
+
             <h3>JSConf Budapest 2015 - 2019</h3>
             <h4>Curator, organizer</h4>
             <ul>
@@ -102,7 +102,7 @@ export default (props) => {
                 <li>Organized and helped at 3 successful events so far</li>
                 <li>My participation was in organizing venue, catering, hotel and flight arrangements and sponsor negotiations</li>
             </ul>
-    
+
             <h3>Frontend Meetup Budapest 2018 - present</h3>
             <h4>Co-Organizer</h4>
             <ul>
@@ -117,55 +117,55 @@ export default (props) => {
                 <li>Mentoring at the workshop itself</li>
             </ul>
         </div>
-    
+
         <h2 className={ css.resumeSectionTitle  }>Speaking Engagements</h2>
-    
-        <div className={ css.resumeSection }>
-        
+
+        <div className={ classnames(css.resumeSection, css.speaking) }>
+
             <h3>NodeConf EU 2018</h3>
             <h4>Healthy & fit wombats for the greater good</h4>
             <p>
                 Kilkenny, Ireland • 2018 Nov 5-7
             </p>
-            
+
             <h3>Thunder Plains 2017</h3>
             <h4>Café Terminal</h4>
             <p>
                 Oklahoma City, OK, USA • 2017 Nov 3
             </p>
-    
+
             <h3>RuhrJS 2017</h3>
             <h4>Redundant DevOps</h4>
             <p>
                 Bochum, Germany • 2017 Oct 14-15
             </p>
-    
+
             <h3>UpFront Conference 2017</h3>
             <h4>Café Terminal</h4>
             <p>
                 Manchester, UK • 2017 May 19
             </p>
-    
+
             <h3>Craft Conference 2014</h3>
             <h4>JavaScript Module Server</h4>
             <p>
                 Budapest, Hungary • 2014 Apr 23-25
             </p>
-    
+
         </div>
-    
+
         <h2 className={ css.resumeSectionTitle }>Education</h2>
-    
+
         <div className={ css.resumeSection }>
-    
+
             <h3>Bachelor of IT Engineering</h3>
             <h4>University of Pécs - PMMFK</h4>
             <ul>
                 <li>Pécs, Hungary  • <em>1999 - 2004</em></li>
             </ul>
-    
+
         </div>
-    
-    
+
+
     </article>
 </Layout>)}

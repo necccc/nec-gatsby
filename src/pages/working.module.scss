@@ -3,66 +3,11 @@
 @import '../components/font-face.scss';
 @import '../components/mixins.scss';
 
-
-/* 
-.layout-resume {
-	header {
-		height: 28rem;
-
-		.top {
-			nav {
-				display: none;
-			}
-
-			h1.logo {
-				left: 1rem;
-				top: 1rem;
-				width: 10rem;
-			}
-
-
-		}
-		h1.title {
-			margin-top: 9rem;
-			padding-left: 4rem;
-		}
-
-	}
-
-	&.header--shrink header {
-		height: 4rem;
-
-		.top {
-			h1.logo {
-				top: 0;
-				left: 0;
-				height: 2.5rem;
-				width: 2.5rem;
-				margin-top: .5rem;
-			}
-			nav ul {
-				display: none;
-			}
-
-			&::after {
-				display: block;
-				position: absolute;
-				content: "Szabolcs Szabolcsi-Toth";
-				left: 4rem;
-				color: $color-white;
-				height: 4rem;
-				line-height: 4rem;
-				font-size: 1.4rem;
-			}
-		}
-	}
-} */
-
 .resume {
 	&-container {
 		@include article();
 
-		padding-top: 24rem;
+		padding-top: 34rem;
 		font-size: 1rem;
 
 		display: grid;
@@ -85,6 +30,19 @@
 		padding-top: 0.55rem;
 		padding-bottom: 2rem;
 		border-bottom: 1px solid $color-light-2;
+
+
+    &.speaking {
+      p {
+        margin-bottom: 3rem;
+      }
+      p:last-child {
+        margin-bottom: 1rem;
+      }
+      h4 {
+        margin-bottom: 1rem;
+      }
+    }
 
 		@media (max-width:480px) {
 			border-bottom: none;
@@ -152,8 +110,8 @@
 				position: relative;
 				counter-increment: li;
 				margin-left: 1.45rem;
-				margin-bottom: 1rem;
-		
+				margin-bottom: .8rem;
+
 				&::before {
 					content: "■";
 					position: absolute;
@@ -163,8 +121,8 @@
 				}
 			}
 		}
+  }
 
 
-	}
 
 }
