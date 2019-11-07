@@ -70,25 +70,25 @@ export default props => (
 
 export const query = graphql`
   query IndexQuery {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: {order: DESC, fields: frontmatter___date}, filter: {frontmatter: {draft: {ne: true}}}) {
       edges {
         node {
           id
-          parent {
-            ... on File {
-              name
-              sourceInstanceName
-            }
-          }
+          timeToRead
           fields {
             slug
           }
-          timeToRead
           frontmatter {
             title
             date
             postdate: date(formatString: "MMMM Do")
             description
+            draft
+          }
+          parent {
+            ... on File {
+              sourceInstanceName
+            }
           }
         }
       }

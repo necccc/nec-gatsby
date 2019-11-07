@@ -6,7 +6,26 @@
 	@include article();
 
 	padding-top: 24rem;
-	padding-bottom: 4rem;
+  padding-bottom: 0rem;
+  position: relative;
+
+  p {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::after {
+		content: '';
+		position: absolute;
+		top: -2rem;
+		z-index: 1;
+		width: 100vw;
+		left: calc(-1 * ((100vw - 100%) / 2));
+		height: 120%;
+		transform: skewY(calc(-0.5 * var(--headerSkew)));
+		transform-origin: bottom left;
+		background-color: $color-light-1;
+	}
 }
 
 
