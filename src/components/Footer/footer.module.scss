@@ -5,7 +5,7 @@
 .footer {
     min-height: 12rem;
     position: relative;
-    margin-top: 5rem;
+    margin-top: 7rem;
     background-color: $color-light-2;
     z-index: 1;
     font-family: $body-font;
@@ -20,7 +20,11 @@
         background-color: inherit;
         z-index: 1;
         bottom: 0;
-        top: -7rem;
+        top: -10rem;
+
+        @media (min-width: 2560px) {
+          top: -12rem;
+        }
         transform: skewY(4deg);
 		    transform-origin: bottom left;
         transition: transform ease-out .1s;

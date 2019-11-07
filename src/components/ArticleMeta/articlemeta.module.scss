@@ -4,9 +4,15 @@
 .meta {
     max-width: 100%;
     width: 100%;
-    padding: 4rem 0 2rem;
+    padding: 4rem 0 4rem;
     margin: -8rem 0 0;
     transform: translateY(6rem);
+
+
+    @media (min-width: 2560px) {
+      padding-top: 2rem;
+
+    }
 
     color: lighten($color-black, 50%);
 
