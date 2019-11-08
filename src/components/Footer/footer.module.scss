@@ -40,63 +40,60 @@
         margin: 0 auto;
 
         h3 {
-            font-weight: 300;
-            text-align: center;
-
-            @media (max-width:480px) {
-                text-align: left;
-
-            }
+          font-weight: 300;
+          text-align: center;
         }
 
         a {
-            text-decoration: none;
-            color: $color-blue;
+          text-decoration: none;
+          color: $color-blue;
 
-            &:visited {
-                color: $color-blue;
-            }
-            &:hover {
-                @include underline($color-light-2, $color-blue);
-            }
+          &:visited {
+              color: $color-blue;
+          }
+          &:hover {
+              @include underline($color-light-2, $color-blue);
+          }
         }
     }
 
     &_content {
-        font-size: $font-small;
-        line-height: 1.6 * $font-small;
-        display: grid;
-        grid-template-columns: 10rem 1px 10rem;
-        grid-gap: 10%;
-        justify-content: center;
-
-        @media (max-width:480px) {
-            display: block;
-        }
-
-		.farewell {
-			grid-column: span 3;
-      grid-row: 1;
-			font-family: $body-font;
-			margin:  0;
-			font-size: 1.3rem;
-			margin: 1rem 0;
-		}
-
-    hr {
-      display: block;
-
-      border-style: solid;
-      border-width: 0 0 0 1px;
-      border-color:lighten($color-black, 60%);
+      font-size: $font-small;
+      line-height: 1.6 * $font-small;
+      display: grid;
+      grid-template-columns: 10rem 1px 10rem;
+      grid-gap: 10%;
+      justify-content: center;
 
       @media (max-width:480px) {
-        display: none;
+        font-size: 1rem;
+        display: block;
+        text-align: center;
       }
-    }
+
+      .farewell {
+        grid-column: span 3;
+        grid-row: 1;
+        font-family: $body-font;
+        margin:  0;
+        font-size: 1.3rem;
+        margin: 1rem 0;
+      }
+
+      hr {
+        display: block;
+
+        border-style: solid;
+        border-width: 0 0 0 1px;
+        border-color:lighten($color-black, 60%);
+
+        @media (max-width:480px) {
+          display: none;
+        }
+      }
 
 		.about,
-		.links, {
+		.links {
       position: relative;
       margin: 0;
       padding: 0;
@@ -119,7 +116,8 @@
 			text-align: right;
 
 			@media (max-width:480px) {
-				text-align: left;
+        text-align: center;
+        margin-bottom: 2rem;
 			}
 		}
     }
@@ -130,9 +128,17 @@
         text-align: center;
         color: lighten($color-black, 50%);
 
+        @media (max-width:480px) {
+          font-size: 1rem;
+        }
+
         svg {
             width: 2rem;
             display: inline-block;
+
+            @media (max-width:480px) {
+              margin-bottom: .8rem;
+            }
 
             path {
                 fill: lighten($color-black, 50%);
