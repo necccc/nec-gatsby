@@ -10,6 +10,10 @@
 	padding-left: 1rem;
 	padding-right: 12rem;
 
+  @media (max-width: 480px) {
+    padding-right: 2rem;
+  }
+
 	&-full {
 		&:before {
 			display: block;
@@ -24,13 +28,21 @@
 		font-weight: 300;
 		font-size: 1.3rem;
 		line-height: 2rem;
-		color: lighten($color-black, 40%);
+    color: lighten($color-black, 40%);
+
+    @media (max-width: 480px) {
+      line-height: 2.4rem;
+    }
 	}
 
 	.footer {
 		font-family: 'Libre Franklin', sans-serif;
 		font-weight: 300;
 		font-size: $font-small;
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
 
 		.by {
 			display: inline-block;

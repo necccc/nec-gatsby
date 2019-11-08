@@ -1,6 +1,15 @@
 @import './font-face.scss';
 @import './mixins.scss';
 
+
+html, body {
+  font-size: 16px;
+
+  @media (max-width:480px) {
+    font-size: 12px;
+  }
+}
+
 h1,h2,h3,h4,p,ul,ol,li,blockquote,span {
 	line-height: $line-height;
 	font-weight: 300;
@@ -24,13 +33,13 @@ h1 {
 	font-size: 3.052rem;
 }
 h2 {
-	font-size: 2.441rem;
+	font-size: 2.2rem;
 }
 h3 {
-	font-size: 1.953rem;
+	font-size: 1.75rem;
 }
 h4 {
-	font-size: 1.563rem;
+	font-size: 1.45rem;
 }
 
 

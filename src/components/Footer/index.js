@@ -82,11 +82,12 @@ const Footer = ({ title = '' }) => (
             >
               Netlify
             </a>
-            .<br />
+            .
+            {/* <br />
             if you're interested how,{' '}
             <a href="/writing/how-this-site-was-made/">
               I've wrote a post about it here!
-            </a>
+            </a> */}
           </p>
         </div>
       </footer>

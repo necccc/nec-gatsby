@@ -18,6 +18,10 @@
 		height: 120%;
 		transform: skewY(calc(-0.5 * var(--headerSkew)));
 		transform-origin: bottom left;
-		background-color: $color-light-1;
+    background-color: $color-light-1;
+
+    @media (max-width: 480px) {
+      top: -8rem;
+		}
 	}
 }
