@@ -167,34 +167,29 @@ module.exports = {
               return allMdx.edges
                 .filter(edge => (edge.node.parent.sourceInstanceName === 'writing'))
                 .map(edge => {
-                  console.log(edge);
-
                   return Object.assign({}, edge.node.frontmatter, {
-                    description: edge.frontmatter.description,
-                    data: edge.node.frontmatter.date,
+                    date: edge.node.frontmatter.postdate,
                     url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                     guid: site.siteMetadata.siteUrl + edge.node.fields.slug
                   })
                 })
             },
-
-            /* if you want to filter for only published posts, you can do
-             * something like this:
-             * filter: { frontmatter: { published: { ne: false } } }
-             * just make sure to add a published frontmatter field to all posts,
-             * otherwise gatsby will complain
-             **/
             query: `
             {
               allMdx(
-                limit: 1000,
-                sort: { order: DESC, fields: [frontmatter___date] },
+                sort: { order: DESC, fields: frontmatter___date },
+                filter: { frontmatter: { draft: { ne: true }}},
+                limit: 1000
               ) {
                 edges {
                   node {
+                    id
+                    fields {
+                      slug
+                    }
                     frontmatter {
                       title
-                      date
+                      postdate: date(formatString: "ddd, DD MMM YYYY 11:00:00 +0100")
                       description
                     }
                     parent {
