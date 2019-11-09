@@ -5,6 +5,9 @@
  */
 
  // https://www.gatsbyjs.org/packages/gatsby-remark-custom-blocks/?=remark
+//require("prismjs/themes/prism.css")
+require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+require("prismjs/plugins/command-line/prism-command-line.css")
 
 const REM = parseInt(window.getComputedStyle(window.document.documentElement)['font-size'], 10);
 

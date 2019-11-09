@@ -1,3 +1,7 @@
+if (process.env !== 'production') {
+  require("dotenv").config()
+}
+
 module.exports = {
   siteMetadata: {
     title: '_Nec',
@@ -18,14 +22,14 @@ module.exports = {
         name: 'writing',
         path: `${__dirname}/content/writing`,
         ignore: [
-          `**/*.jpg`, 
+          `**/*.jpg`,
           `**/*.svg`,
           `**/*.gif`,
           `**/*.jpeg`,
           `**/*.webp`,
-          `**/*.png`,     
-          `**/*.js`, 
-          `**/*.mp4`, 
+          `**/*.png`,
+          `**/*.js`,
+          `**/*.mp4`,
           `**/*.m4v`
         ],
       }
@@ -36,9 +40,9 @@ module.exports = {
         name: 'postimages',
         path: `${__dirname}/content/writing`,
         ignore: [
-          `**/*.mdx`, 
-          `**/*.js`, 
-          `**/*.mp4`, 
+          `**/*.mdx`,
+          `**/*.js`,
+          `**/*.mp4`,
           `**/*.m4v`
         ],
       }
@@ -49,14 +53,14 @@ module.exports = {
         name: 'postvideos',
         path: `${__dirname}/content/writing`,
         ignore: [
-          `**/*.mdx`, 
-          `**/*.js`, 
-          `**/*.jpg`, 
+          `**/*.mdx`,
+          `**/*.js`,
+          `**/*.jpg`,
           `**/*.svg`,
           `**/*.gif`,
           `**/*.jpeg`,
           `**/*.webp`,
-          `**/*.png`,     
+          `**/*.png`,
           `**/*.js`,
         ],
       }
@@ -94,7 +98,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-smartypants`,
           },
-          {
+          /* {
             resolve: "gatsby-remark-embed-gist",
             options: {
               // Optional:
@@ -106,7 +110,24 @@ module.exports = {
               // default: true
               includeDefaultCss: true
             },
-          },
+          }, */
+          {
+            resolve: require.resolve(`./plugins/gatsby-remark-gist-prismjs`),
+            options: {
+              accessToken: process.env.GITHUB_ACCESS_TOKEN,
+              classPrefix: `language-`,
+              inlineCodeMarker: null,
+              aliases: {},
+              noInlineHighlight: false,
+              showLineNumbers: true,
+              languageExtensions: [],
+              prompt: {
+                user: `nec`,
+                host: `localhost`,
+                global: false,
+              },
+            }
+          }
         ],
       },
     },
@@ -146,6 +167,8 @@ module.exports = {
               return allMdx.edges
                 .filter(edge => (edge.node.parent.sourceInstanceName === 'writing'))
                 .map(edge => {
+                  console.log(edge);
+
                   return Object.assign({}, edge.node.frontmatter, {
                     description: edge.frontmatter.description,
                     data: edge.node.frontmatter.date,

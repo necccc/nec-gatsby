@@ -5,9 +5,6 @@ import css from './working.module.scss'
 
 export default (props) => {
 
-    console.log(css);
-
-
     return (
 <Layout title="Szabolcs Szabolcsi-Toth" resume>
 
