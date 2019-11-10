@@ -34,6 +34,11 @@
 		margin-left: 1.45rem;
 		margin-bottom: 1.45rem;
 
+    @media (max-width:480px) {
+      margin-left: 1.45rem;
+    }
+
+
 		&::before {
 			content: "■";
 			position: absolute;
@@ -42,6 +47,13 @@
       color: $color-blue;
       font-size: 1.45rem;
       line-height: 1.45;
+
+      @media (max-width:480px) {
+        font-size: 1rem;
+        top: 0.5rem;
+        left: -0.1rem;
+      }
+
 		}
 	}
 
@@ -60,11 +72,16 @@
   }
 
   :global {
+
     .gatsby-highlight pre[class*="language-"] {
       code {
         background-color: transparent;
         font-size: 1rem;
         padding: 0;
+
+        @media (max-width:480px) {
+          font-size: 9px;
+        }
       }
     }
 
@@ -78,8 +95,11 @@
       .line-numbers-rows,
       .line-numbers-rows span {
         line-height: 1.5;
-      }
 
+        @media (max-width:480px) {
+          font-size: 14px;
+        }
+      }
     }
 
     /**
